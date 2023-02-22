@@ -19,6 +19,7 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "GifApp"
-include(":app")
-
 enableFeaturePreview("VERSION_CATALOGS")
+
+include(":app")
+include(":data")
