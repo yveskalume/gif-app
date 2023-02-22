@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">GifApp</string>
+    
+    <string-array name="gif_categories">
+        <item>Clips</item>
+        <item>Gifs</item>
+        <item>Stickers</item>
+        <item>Emoji</item>
+        <item>Text</item>
+    </string-array>
 </resources>

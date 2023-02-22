@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.yvkalume.gifapp.ui.screen.home.HomeScreen
 import com.yvkalume.gifapp.ui.theme.GifAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
 										modifier = Modifier.fillMaxSize(),
 										color = MaterialTheme.colors.background
 								) {
-										Greeting("Android")
+										HomeScreen()
 								}
 						}
 				}
