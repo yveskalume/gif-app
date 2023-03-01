@@ -52,13 +52,20 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":data"))
+
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.ktx)
     implementation(libs.bundles.compose)
 
-    implementation(libs.coil)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.gif)
+
+    implementation(libs.shimmer)
 
     implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
 
     implementation(libs.pager)

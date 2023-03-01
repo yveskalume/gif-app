@@ -6,3 +6,6 @@ data class Gif(
 		val title: String = "",
 		val images: GifImage
 )
+
+val Gif.imageUrl
+	get() = images.fixed_height.url

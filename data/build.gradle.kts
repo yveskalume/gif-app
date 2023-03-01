@@ -4,6 +4,7 @@ plugins {
 		id("dagger.hilt.android.plugin")
 		kotlin("kapt")
 		kotlin("plugin.serialization") version "1.8.10"
+		id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 
 }
 
@@ -56,4 +57,15 @@ dependencies {
 
 		implementation(libs.hilt.android)
 		kapt(libs.hilt.compiler)
+}
+
+secrets {
+		// Change the properties file from the default "local.properties" in your root project
+		// to another properties file in your root project.
+		propertiesFileName = "secrets.properties"
+
+		// A properties file containing default secret values. This file can be checked in version
+		// control.
+		defaultPropertiesFileName = "secrets.sample.properties"
+
 }

@@ -3,6 +3,5 @@ package com.yvkalume.gifapp.data.model.server
 data class MetaObject(
 		val msg: String = "",
 		val status: Int,
-		//response_id
-		val responseId: String = ""
+		val response_id: String = ""
 )

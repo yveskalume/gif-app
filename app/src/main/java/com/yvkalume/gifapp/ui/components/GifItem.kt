@@ -1,6 +1,8 @@
 package com.yvkalume.gifapp.ui.components
 
+import android.os.Build.VERSION.SDK_INT
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,23 +20,41 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import coil.ImageLoader
 import coil.compose.SubcomposeAsyncImage
-import com.yvkalume.gifapp.ui.theme.GifAppTheme
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
+import com.valentinilk.shimmer.shimmer
+import com.yvkalume.gifapp.data.model.server.Gif
+import com.yvkalume.gifapp.data.model.server.imageUrl
 
 @Composable
-fun GifItem(modifier: Modifier = Modifier) {
+fun GifItem(gif: Gif, modifier: Modifier = Modifier) {
+		val context = LocalContext.current
 		Column(modifier = Modifier.wrapContentHeight()) {
 				SubcomposeAsyncImage(
 						modifier = Modifier
 								.fillMaxWidth()
 								.height(200.dp)
 								.then(modifier),
-						model = "https://example.com/image.jpg",
+						model = gif.imageUrl,
 						loading = {
-								CircularProgressIndicator(modifier = Modifier.size(30.dp))
+								Box(modifier = Modifier
+										.fillMaxSize()
+										.shimmer()
+								)
 						},
+						imageLoader = ImageLoader.Builder(context)
+								.components {
+										if (SDK_INT >= 28) {
+												add(ImageDecoderDecoder.Factory())
+										} else {
+												add(GifDecoder.Factory())
+										}
+								}
+								.build(),
 						contentDescription = null,
 						contentScale = ContentScale.Crop,
 						alignment = Alignment.Center
@@ -51,10 +71,10 @@ fun GifItem(modifier: Modifier = Modifier) {
 		}
 }
 
-@Preview
-@Composable
-fun GiftItemPreview() {
-		GifAppTheme {
-				GifItem()
-		}
-}
+//@Preview
+//@Composable
+//fun GiftItemPreview() {
+//		GifAppTheme {
+//				GifItem()
+//		}
+//}
