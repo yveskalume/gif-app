@@ -12,7 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.yvkalume.gifapp.ui.screen.home.HomeScreen
 import com.yvkalume.gifapp.ui.theme.GifAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 		override fun onCreate(savedInstanceState: Bundle?) {
 				super.onCreate(savedInstanceState)
