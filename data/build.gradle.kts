@@ -3,6 +3,8 @@ plugins {
 		id("org.jetbrains.kotlin.android")
 		id("dagger.hilt.android.plugin")
 		kotlin("kapt")
+		kotlin("plugin.serialization") version "1.8.10"
+
 }
 
 android {
@@ -42,6 +44,15 @@ dependencies {
 		testImplementation(libs.junit.test)
 		androidTestImplementation(libs.junit.androidTest)
 		androidTestImplementation(libs.espresso.androidTest)
+
+		implementation(libs.ktor.core)
+		implementation(libs.ktor.android)
+		implementation(libs.ktor.serialization)
+		implementation(libs.ktor.contentnegotiation)
+
+
+
+		implementation(libs.kotlin.serialization)
 
 		implementation(libs.hilt.android)
 		kapt(libs.hilt.compiler)
