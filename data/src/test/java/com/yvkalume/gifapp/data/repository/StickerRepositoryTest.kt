@@ -26,7 +26,7 @@ class StickerRepositoryTest {
 		@MockK
 		lateinit var stickerRemoteDataSource: StickerRemoteDataSource
 
-		lateinit var stickerRepository: StickerRepository
+		private lateinit var stickerRepository: StickerRepository
 
 		@Before
 		fun setUp() {

@@ -2,6 +2,7 @@ plugins {
 		id("com.android.library")
 		id("org.jetbrains.kotlin.android")
 		id("dagger.hilt.android.plugin")
+		id("com.google.devtools.ksp")
 		kotlin("kapt")
 		kotlin("plugin.serialization") version "1.8.10"
 		id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
@@ -60,6 +61,11 @@ dependencies {
 
 		implementation(libs.coroutine)
 		testImplementation(libs.coroutine.test)
+
+		implementation(libs.room.runtime)
+		implementation(libs.room.ktx)
+		ksp(libs.room.ksp)
+		testImplementation(libs.room.test)
 }
 
 secrets {

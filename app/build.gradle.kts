@@ -67,11 +67,20 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
+    testImplementation(libs.hilt.test)
 
     implementation(libs.pager)
     implementation(libs.pager.indicators)
 
     debugImplementation(libs.bundles.compose.debug)
+
+    testImplementation(libs.junit.test)
+    androidTestImplementation(libs.junit.androidTest)
+    androidTestImplementation(libs.espresso.androidTest)
+    testImplementation(libs.mockk)
+
+    implementation(libs.coroutine)
+    testImplementation(libs.coroutine.test)
 }
 
 kapt {
