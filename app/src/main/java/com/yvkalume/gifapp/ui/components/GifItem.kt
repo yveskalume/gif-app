@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Favorite
@@ -19,8 +21,10 @@ import androidx.compose.material.icons.rounded.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.compose.SubcomposeAsyncImage
@@ -29,6 +33,7 @@ import coil.decode.ImageDecoderDecoder
 import com.valentinilk.shimmer.shimmer
 import com.yvkalume.gifapp.data.model.server.Gif
 import com.yvkalume.gifapp.data.model.server.imageUrl
+import com.yvkalume.gifapp.ui.theme.GifAppTheme
 
 @Composable
 fun GifItem(gif: Gif, modifier: Modifier = Modifier) {
@@ -37,7 +42,9 @@ fun GifItem(gif: Gif, modifier: Modifier = Modifier) {
 				SubcomposeAsyncImage(
 						modifier = Modifier
 								.fillMaxWidth()
-								.height(200.dp)
+								.height(300.dp)
+								.padding(16.dp)
+								.clip(RoundedCornerShape(24.dp))
 								.then(modifier),
 						model = gif.imageUrl,
 						loading = {
@@ -56,19 +63,21 @@ fun GifItem(gif: Gif, modifier: Modifier = Modifier) {
 								}
 								.build(),
 						contentDescription = null,
-						contentScale = ContentScale.Crop,
+						contentScale = ContentScale.FillHeight,
 						alignment = Alignment.Center
 				)
 				Row(
 						modifier = Modifier
 								.fillMaxWidth()
-								.padding(8.dp),
+								.padding(horizontal = 16.dp),
 						horizontalArrangement = Arrangement.SpaceBetween
 				) {
 						Icon(imageVector = Icons.Rounded.Favorite, contentDescription = null)
 						Icon(imageVector = Icons.Rounded.Share, contentDescription = null)
 				}
 		}
+
+		Divider(modifier = Modifier.padding(vertical = 16.dp))
 }
 
 //@Preview
