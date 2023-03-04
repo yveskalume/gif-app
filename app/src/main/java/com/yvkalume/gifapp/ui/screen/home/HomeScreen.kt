@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.ScrollableTabRow
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.material.TabRowDefaults
@@ -27,7 +26,8 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
 import com.yvkalume.gifapp.R
-import com.yvkalume.gifapp.ui.screen.home.components.HomeContentList
+import com.yvkalume.gifapp.ui.screen.home.components.GifListView
+import com.yvkalume.gifapp.ui.screen.home.components.StickerListView
 import com.yvkalume.gifapp.ui.screen.home.logic.HomeViewModel
 import com.yvkalume.gifapp.ui.theme.GifAppTheme
 import kotlinx.coroutines.launch
@@ -90,10 +90,10 @@ fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
 				) {
 						when (pagerState.currentPage) {
 								0 -> {
-										HomeContentList(uiState = gifsState)
+										StickerListView(uiState = stickersState)
 								}
 								1 -> {
-										HomeContentList(uiState = stickersState)
+										GifListView(uiState = gifsState)
 								}
 						}
 				}

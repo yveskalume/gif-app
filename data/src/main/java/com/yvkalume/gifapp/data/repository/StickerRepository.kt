@@ -1,6 +1,7 @@
 package com.yvkalume.gifapp.data.repository
 
 import com.yvkalume.gifapp.data.datasource.sticker.StickerRemoteDataSource
+import com.yvkalume.gifapp.data.model.mapper.StickerEntityMapper
 import com.yvkalume.gifapp.data.util.Result
 import javax.inject.Inject
 import kotlinx.coroutines.flow.catch
@@ -14,7 +15,8 @@ class StickerRepository @Inject constructor(private val remoteDataSource: Sticke
 				if (response.meta.status != 200) {
 						emit(Result.Error(Exception(response.meta.msg)))
 				} else {
-						emit(Result.Success(response.data))
+						val stickerEntities = StickerEntityMapper.mapList(response.data)
+						emit(Result.Success(stickerEntities))
 				}
 		}.catch {
 				emit(Result.Error(Exception(it.localizedMessage)))

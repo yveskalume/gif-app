@@ -1,6 +1,6 @@
 package com.yvkalume.gifapp.ui.components
 
-import android.os.Build.VERSION.SDK_INT
+import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,10 +28,10 @@ import coil.compose.SubcomposeAsyncImage
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import com.valentinilk.shimmer.shimmer
-import com.yvkalume.gifapp.data.model.entity.GifEntity
+import com.yvkalume.gifapp.data.model.entity.StickerEntity
 
 @Composable
-fun GifItem(gif: GifEntity, modifier: Modifier = Modifier) {
+fun StickerItem(sticker: StickerEntity, modifier: Modifier = Modifier) {
 		val context = LocalContext.current
 		Column(modifier = Modifier.wrapContentHeight()) {
 				SubcomposeAsyncImage(
@@ -41,7 +41,7 @@ fun GifItem(gif: GifEntity, modifier: Modifier = Modifier) {
 								.padding(16.dp)
 								.clip(RoundedCornerShape(24.dp))
 								.then(modifier),
-						model = gif.imageUrl,
+						model = sticker.imageUrl,
 						loading = {
 								Box(
 										modifier = Modifier
@@ -51,7 +51,7 @@ fun GifItem(gif: GifEntity, modifier: Modifier = Modifier) {
 						},
 						imageLoader = ImageLoader.Builder(context)
 								.components {
-										if (SDK_INT >= 28) {
+										if (Build.VERSION.SDK_INT >= 28) {
 												add(ImageDecoderDecoder.Factory())
 										} else {
 												add(GifDecoder.Factory())
@@ -59,7 +59,7 @@ fun GifItem(gif: GifEntity, modifier: Modifier = Modifier) {
 								}
 								.build(),
 						contentDescription = null,
-						contentScale = ContentScale.Crop,
+						contentScale = ContentScale.FillHeight,
 						alignment = Alignment.Center
 				)
 				Row(

@@ -2,7 +2,7 @@
     <string name="app_name">GifApp</string>
     
     <string-array name="gif_categories">
-        <item>Gifs</item>
         <item>Stickers</item>
+        <item>Gifs</item>
     </string-array>
 </resources>
