@@ -8,7 +8,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.yvkalume.gifapp.data.model.entity.GifEntity
+import com.yvkalume.gifapp.data.model.room.GifEntity
 import com.yvkalume.gifapp.ui.components.GifItem
 import com.yvkalume.gifapp.ui.screen.home.logic.HomeUiState
 

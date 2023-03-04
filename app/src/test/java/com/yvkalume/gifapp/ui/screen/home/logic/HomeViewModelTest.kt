@@ -1,6 +1,6 @@
 package com.yvkalume.gifapp.ui.screen.home.logic
 
-import com.yvkalume.gifapp.data.model.entity.GifEntity
+import com.yvkalume.gifapp.data.model.room.GifEntity
 import com.yvkalume.gifapp.data.repository.GifRepository
 import com.yvkalume.gifapp.data.repository.StickerRepository
 import com.yvkalume.gifapp.data.util.Result

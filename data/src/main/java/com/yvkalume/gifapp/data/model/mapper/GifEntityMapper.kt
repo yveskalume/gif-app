@@ -1,6 +1,6 @@
 package com.yvkalume.gifapp.data.model.mapper
 
-import com.yvkalume.gifapp.data.model.entity.GifEntity
+import com.yvkalume.gifapp.data.model.room.GifEntity
 import com.yvkalume.gifapp.data.model.server.GiphyItem
 
 object GifEntityMapper : Mapper<GiphyItem, GifEntity>() {

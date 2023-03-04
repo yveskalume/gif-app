@@ -28,7 +28,7 @@ import coil.compose.SubcomposeAsyncImage
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import com.valentinilk.shimmer.shimmer
-import com.yvkalume.gifapp.data.model.entity.StickerEntity
+import com.yvkalume.gifapp.data.model.room.StickerEntity
 
 @Composable
 fun StickerItem(sticker: StickerEntity, modifier: Modifier = Modifier) {

@@ -1,4 +1,4 @@
-package com.yvkalume.gifapp.data.model.entity
+package com.yvkalume.gifapp.data.model.room
 
 data class StickerEntity(
 		val id: String,

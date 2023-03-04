@@ -1,4 +1,4 @@
-package com.yvkalume.gifapp.data.model.entity
+package com.yvkalume.gifapp.data.model.room
 
 data class GifEntity(
 		val id: String,

@@ -28,7 +28,7 @@ import coil.compose.SubcomposeAsyncImage
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import com.valentinilk.shimmer.shimmer
-import com.yvkalume.gifapp.data.model.entity.GifEntity
+import com.yvkalume.gifapp.data.model.room.GifEntity
 
 @Composable
 fun GifItem(gif: GifEntity, modifier: Modifier = Modifier) {

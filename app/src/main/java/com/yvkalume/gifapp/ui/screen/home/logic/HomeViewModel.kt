@@ -2,7 +2,6 @@ package com.yvkalume.gifapp.ui.screen.home.logic
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.yvkalume.gifapp.data.model.entity.GifEntity
 import com.yvkalume.gifapp.data.repository.GifRepository
 import com.yvkalume.gifapp.data.repository.StickerRepository
 import com.yvkalume.gifapp.data.util.Result
