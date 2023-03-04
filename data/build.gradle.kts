@@ -45,18 +45,21 @@ dependencies {
 		testImplementation(libs.junit.test)
 		androidTestImplementation(libs.junit.androidTest)
 		androidTestImplementation(libs.espresso.androidTest)
+		testImplementation(libs.mockk)
 
 		implementation(libs.ktor.core)
 		implementation(libs.ktor.android)
 		implementation(libs.ktor.serialization)
 		implementation(libs.ktor.contentnegotiation)
 
-
-
 		implementation(libs.kotlin.serialization)
 
 		implementation(libs.hilt.android)
 		kapt(libs.hilt.compiler)
+		testImplementation(libs.hilt.test)
+
+		implementation(libs.coroutine)
+		testImplementation(libs.coroutine.test)
 }
 
 secrets {
