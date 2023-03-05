@@ -66,6 +66,8 @@ dependencies {
 		implementation(libs.room.ktx)
 		ksp(libs.room.ksp)
 		testImplementation(libs.room.test)
+
+		testImplementation(libs.faker)
 }
 
 secrets {

@@ -74,6 +74,7 @@ android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", ver
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
 shimmer = "com.valentinilk.shimmer:compose-shimmer:1.0.4"
+faker = "io.github.serpro69:kotlin-faker:1.13.0"
 
 [bundles]
 core = ["core-ktx", "lifecycle-ktx"]
