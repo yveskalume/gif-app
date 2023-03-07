@@ -9,7 +9,9 @@ object StickerEntityMapper : Mapper<GiphyItem, StickerEntity>() {
 						StickerEntity(
 								id = id,
 								title = title,
-								imageUrl = images.fixed_height.url
+								imageUrl = images.fixed_height.url,
+								createdAt = System.currentTimeMillis(),
+								updatedAt = System.currentTimeMillis()
 						)
 				}
 		}

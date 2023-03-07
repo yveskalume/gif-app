@@ -10,11 +10,18 @@ data class GifEntity(
 		val id: String,
 		val title: String,
 		val imageUrl: String,
-		val isFavorite: Boolean = false
+		val isFavorite: Boolean = false,
+		val createdAt: Long,
+		val updatedAt: Long
 )
 
 fun Gif.toEntity(): GifEntity {
 		return GifEntity(
-				id = id, title = title, imageUrl = imageUrl, isFavorite = isFavorite
+				id = id,
+				title = title,
+				imageUrl = imageUrl,
+				isFavorite = isFavorite,
+				createdAt = createdAt,
+				updatedAt = updatedAt
 		)
 }

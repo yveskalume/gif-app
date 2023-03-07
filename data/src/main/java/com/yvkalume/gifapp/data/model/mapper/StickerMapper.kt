@@ -10,7 +10,9 @@ object StickerMapper : Mapper<StickerEntity, Sticker>() {
 								id = id,
 								title = title,
 								imageUrl = imageUrl,
-								isFavorite = isFavorite
+								isFavorite = isFavorite,
+								createdAt = createdAt,
+								updatedAt = updatedAt
 						)
 				}
 		}

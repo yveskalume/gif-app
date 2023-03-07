@@ -10,7 +10,9 @@ object GifMapper : Mapper<GifEntity, Gif>() {
 								id = id,
 								title = title,
 								imageUrl = imageUrl,
-								isFavorite = isFavorite
+								isFavorite = isFavorite,
+								createdAt = createdAt,
+								updatedAt = updatedAt
 						)
 				}
 		}

@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.yvkalume.gifapp.data.room.AppDatabase
 import com.yvkalume.gifapp.data.room.dao.GifDao
 import com.yvkalume.gifapp.data.room.dao.StickerDao
+import com.yvkalume.gifapp.data.room.migrations.MIGRATION_1_2
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,7 +23,7 @@ object RoomModule {
 				return Room.databaseBuilder(
 						context,
 						AppDatabase::class.java, "database-name"
-				).build()
+				).addMigrations(MIGRATION_1_2).build()
 		}
 
 		@Provides
@@ -31,7 +32,7 @@ object RoomModule {
 		}
 
 		@Provides
-		fun provideStickerDao(db: AppDatabase) : StickerDao {
+		fun provideStickerDao(db: AppDatabase): StickerDao {
 				return db.stickerDao()
 		}
 }

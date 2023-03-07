@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface GifDao {
 
-		@Query("SELECT * FROM gifs")
+		@Query("SELECT * FROM gifs ORDER BY createdAt DESC")
 		fun getAll() : Flow<List<GifEntity>>
 
 		@Query("SELECT * FROM gifs WHERE id=:id LIMIT 1")
@@ -23,7 +23,7 @@ interface GifDao {
 		@Update
 		fun update(gif: GifEntity)
 
-		@Query("SELECT * FROM gifs WHERE isFavorite = true")
+		@Query("SELECT * FROM gifs WHERE isFavorite = true ORDER BY updatedAt DESC")
 		fun getFavorites() : Flow<List<GifEntity>>
 
 }

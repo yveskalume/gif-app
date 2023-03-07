@@ -10,18 +10,9 @@ object GifEntityMapper : Mapper<GiphyItem, GifEntity>() {
 						GifEntity(
 								id = id,
 								title = title,
-								imageUrl = images.fixed_height.url
-						)
-				}
-		}
-
-		fun map(input: Gif) : GifEntity {
-				return with(input) {
-						GifEntity(
-								id = id,
-								title = title,
-								imageUrl = imageUrl,
-								isFavorite = isFavorite
+								imageUrl = images.fixed_height.url,
+								createdAt = System.currentTimeMillis(),
+								updatedAt = System.currentTimeMillis()
 						)
 				}
 		}

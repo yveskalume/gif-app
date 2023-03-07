@@ -10,12 +10,19 @@ data class StickerEntity(
 		val id: String,
 		val title: String,
 		val imageUrl: String,
-		val isFavorite: Boolean = false
+		val isFavorite: Boolean = false,
+		val createdAt: Long,
+		val updatedAt: Long
 )
 
 
 fun Sticker.toEntity(): StickerEntity {
 		return StickerEntity(
-				id = id, title = title, imageUrl = imageUrl, isFavorite = isFavorite
+				id = id,
+				title = title,
+				imageUrl = imageUrl,
+				isFavorite = isFavorite,
+				createdAt = createdAt,
+				updatedAt = updatedAt
 		)
 }

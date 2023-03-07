@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface StickerDao {
 
-		@Query("SELECT * FROM stickers")
+		@Query("SELECT * FROM stickers ORDER BY createdAt DESC")
 		fun getAll() : Flow<List<StickerEntity>>
 
 		@Query("SELECT * FROM stickers WHERE id=:id LIMIT 1")
@@ -24,6 +24,6 @@ interface StickerDao {
 		@Update
 		fun update(sticker: StickerEntity)
 
-		@Query("SELECT * FROM stickers WHERE isFavorite = true")
+		@Query("SELECT * FROM stickers WHERE isFavorite = true ORDER BY updatedAt DESC")
 		fun getFavorites(): Flow<List<StickerEntity>>
 }

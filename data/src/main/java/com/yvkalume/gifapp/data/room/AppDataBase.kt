@@ -7,7 +7,7 @@ import com.yvkalume.gifapp.data.model.room.StickerEntity
 import com.yvkalume.gifapp.data.room.dao.GifDao
 import com.yvkalume.gifapp.data.room.dao.StickerDao
 
-@Database(entities = [GifEntity::class, StickerEntity::class], version = 1)
+@Database(entities = [GifEntity::class, StickerEntity::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
 		abstract fun gifDao(): GifDao
 		abstract fun stickerDao(): StickerDao
