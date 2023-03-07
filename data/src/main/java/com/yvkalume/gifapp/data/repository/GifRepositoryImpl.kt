@@ -4,9 +4,9 @@ import android.util.Log
 import com.yvkalume.gifapp.data.datasource.gif.GifLocalDataSource
 import com.yvkalume.gifapp.data.datasource.gif.GifRemoteDataSource
 import com.yvkalume.gifapp.data.model.mapper.GifEntityMapper
-import com.yvkalume.gifapp.data.model.room.GifEntity
-import com.yvkalume.gifapp.data.util.IoDispatcher
-import com.yvkalume.gifapp.data.util.Result
+import com.yvkalume.gifapp.data.model.mapper.GifMapper
+import com.yvkalume.gifapp.domain.entity.Gif
+import com.yvkalume.gifapp.domain.repository.GifRepository
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -14,12 +14,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-class GifRepository @Inject constructor(
+class GifRepositoryImpl @Inject constructor(
 		private val remoteDataSource: GifRemoteDataSource,
 		private val localDataSource: GifLocalDataSource,
 		private val coroutineScope: CoroutineScope,
-		@IoDispatcher private val coroutineDispatcher: CoroutineDispatcher
-) {
+		private val coroutineDispatcher: CoroutineDispatcher
+) : GifRepository {
 
 		private fun updateLocalCache() {
 				coroutineScope.launch(coroutineDispatcher) {
@@ -35,8 +35,8 @@ class GifRepository @Inject constructor(
 				}
 		}
 
-		fun getAllTrending(): Flow<Result<List<GifEntity>>> {
+		override fun getAllTrending(): Flow<List<Gif>> {
 				updateLocalCache()
-				return localDataSource.getAll().map { Result.Success(it) }
+				return localDataSource.getAll().map { GifMapper.mapList(it) }
 		}
 }

@@ -28,10 +28,10 @@ import coil.compose.SubcomposeAsyncImage
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import com.valentinilk.shimmer.shimmer
-import com.yvkalume.gifapp.data.model.room.GifEntity
+import com.yvkalume.gifapp.domain.entity.Gif
 
 @Composable
-fun GifItem(gif: GifEntity, modifier: Modifier = Modifier) {
+fun GifItem(gif: Gif, modifier: Modifier = Modifier) {
 		val context = LocalContext.current
 		Column(modifier = Modifier.wrapContentHeight()) {
 				SubcomposeAsyncImage(

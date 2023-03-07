@@ -1,8 +1,8 @@
 package com.yvkalume.gifapp.ui.screen.home.logic
 
 import com.yvkalume.gifapp.data.model.room.GifEntity
-import com.yvkalume.gifapp.data.repository.GifRepository
-import com.yvkalume.gifapp.data.repository.StickerRepository
+import com.yvkalume.gifapp.data.repository.GifRepositoryImpl
+import com.yvkalume.gifapp.data.repository.StickerRepositoryImpl
 import com.yvkalume.gifapp.data.util.Result
 import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
@@ -26,10 +26,10 @@ class HomeViewModelTest {
 		private lateinit var homeViewModel: HomeViewModel
 
 		@RelaxedMockK
-		lateinit var gifRepository: GifRepository
+		lateinit var gifRepository: GifRepositoryImpl
 
 		@RelaxedMockK
-		lateinit var stickerRepository: StickerRepository
+		lateinit var stickerRepository: StickerRepositoryImpl
 
 		@Before
 		fun setUp() {

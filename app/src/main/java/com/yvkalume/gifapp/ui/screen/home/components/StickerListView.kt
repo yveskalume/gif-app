@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.yvkalume.gifapp.data.model.room.StickerEntity
+import com.yvkalume.gifapp.domain.entity.Sticker
 import com.yvkalume.gifapp.ui.components.StickerItem
 import com.yvkalume.gifapp.ui.screen.home.logic.HomeUiState
 
@@ -24,7 +25,7 @@ fun StickerListView(modifier: Modifier = Modifier, uiState: HomeUiState) {
 								CircularProgressIndicator()
 						}
 						is HomeUiState.Success<*> -> {
-								val stickers = (state.data as? List<StickerEntity>) ?: emptyList()
+								val stickers = (state.data as? List<Sticker>) ?: emptyList()
 								LazyColumn(
 										modifier = modifier.fillMaxSize(),
 										content = {

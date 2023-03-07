@@ -28,10 +28,10 @@ import coil.compose.SubcomposeAsyncImage
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import com.valentinilk.shimmer.shimmer
-import com.yvkalume.gifapp.data.model.room.StickerEntity
+import com.yvkalume.gifapp.domain.entity.Sticker
 
 @Composable
-fun StickerItem(sticker: StickerEntity, modifier: Modifier = Modifier) {
+fun StickerItem(sticker: Sticker, modifier: Modifier = Modifier) {
 		val context = LocalContext.current
 		Column(modifier = Modifier.wrapContentHeight()) {
 				SubcomposeAsyncImage(

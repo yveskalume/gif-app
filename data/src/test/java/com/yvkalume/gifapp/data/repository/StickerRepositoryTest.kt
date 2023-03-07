@@ -19,7 +19,6 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -35,7 +34,7 @@ class StickerRepositoryTest {
 		@MockK
 		lateinit var stickerLocalDataSource: StickerLocalDataSource
 
-		private lateinit var stickerRepository: StickerRepository
+		private lateinit var stickerRepository: StickerRepositoryImpl
 
 		private val coroutineScope = CoroutineScope(SupervisorJob())
 
@@ -45,7 +44,7 @@ class StickerRepositoryTest {
 		@OptIn(ExperimentalCoroutinesApi::class)
 		@Before
 		fun setUp() {
-				stickerRepository = StickerRepository(
+				stickerRepository = StickerRepositoryImpl(
 						stickerRemoteDataSource,
 						stickerLocalDataSource,
 						coroutineScope,

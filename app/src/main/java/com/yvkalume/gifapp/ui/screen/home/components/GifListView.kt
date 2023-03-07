@@ -8,7 +8,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.yvkalume.gifapp.data.model.room.GifEntity
+import com.yvkalume.gifapp.domain.entity.Gif
 import com.yvkalume.gifapp.ui.components.GifItem
 import com.yvkalume.gifapp.ui.screen.home.logic.HomeUiState
 
@@ -24,7 +24,7 @@ fun GifListView(modifier: Modifier = Modifier, uiState: HomeUiState) {
 								CircularProgressIndicator()
 						}
 						is HomeUiState.Success<*> -> {
-								val gifs = (state.data as? List<GifEntity>) ?: emptyList()
+								val gifs = (state.data as? List<Gif>) ?: emptyList()
 								LazyColumn(
 										modifier = modifier.fillMaxSize(),
 										content = {

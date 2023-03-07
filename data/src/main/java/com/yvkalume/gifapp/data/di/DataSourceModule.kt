@@ -6,11 +6,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
-import javax.inject.Singleton
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
+import javax.inject.Singleton
 import kotlinx.serialization.json.Json
-
 
 @Module
 @InstallIn(SingletonComponent::class)

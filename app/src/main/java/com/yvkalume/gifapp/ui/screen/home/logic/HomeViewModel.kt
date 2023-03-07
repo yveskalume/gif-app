@@ -2,13 +2,13 @@ package com.yvkalume.gifapp.ui.screen.home.logic
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.yvkalume.gifapp.data.repository.GifRepository
-import com.yvkalume.gifapp.data.repository.StickerRepository
-import com.yvkalume.gifapp.data.util.Result
+import com.yvkalume.gifapp.domain.repository.GifRepository
+import com.yvkalume.gifapp.domain.repository.StickerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
@@ -18,25 +18,25 @@ class HomeViewModel @Inject constructor(
 		stickerRepository: StickerRepository
 ) : ViewModel() {
 
-		val gifs: StateFlow<HomeUiState> = gifRepository.getAllTrending().map { result ->
-				when (result) {
-						is Result.Error -> HomeUiState.Error(result.exception.message.toString())
-						is Result.Success -> HomeUiState.Success(result.data)
-				}
+		val gifs: StateFlow<HomeUiState> = gifRepository.getAllTrending().map { data ->
+				HomeUiState.Success(data)
+		}.catch {
+				HomeUiState.Error(it.message.toString())
 		}.stateIn(
 				scope = viewModelScope,
 				started = SharingStarted.WhileSubscribed(5_000L),
 				initialValue = HomeUiState.Loading
 		)
 
-		val stickers: StateFlow<HomeUiState> = stickerRepository.getAllTrending().map { result ->
-				when (result) {
-						is Result.Error -> HomeUiState.Error(result.exception.message.toString())
-						is Result.Success -> HomeUiState.Success(result.data)
-				}
+
+		val stickers: StateFlow<HomeUiState> = stickerRepository.getAllTrending().map { data ->
+				HomeUiState.Success(data)
+		}.catch {
+				HomeUiState.Error(it.message.toString())
 		}.stateIn(
 				scope = viewModelScope,
 				started = SharingStarted.WhileSubscribed(5_000L),
 				initialValue = HomeUiState.Loading
 		)
+
 }

@@ -22,3 +22,4 @@ rootProject.name = "GifApp"
 
 include(":app")
 include(":data")
+include(":domain")
