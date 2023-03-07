@@ -18,11 +18,11 @@ interface StickerDao {
 		@Query("SELECT * FROM stickers WHERE id=:id LIMIT 1")
 		fun findById(id: String) : StickerEntity
 
-		@Insert(onConflict = OnConflictStrategy.ABORT)
-		suspend fun insert(vararg gif: StickerEntity)
+		@Insert(onConflict = OnConflictStrategy.IGNORE)
+		suspend fun insert(vararg sticker: StickerEntity)
 
 		@Update
-		fun update(gif: StickerEntity)
+		fun update(sticker: StickerEntity)
 
 		@Query("SELECT * FROM stickers WHERE isFavorite = true")
 		fun getFavorites(): Flow<List<StickerEntity>>
