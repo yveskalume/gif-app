@@ -70,6 +70,8 @@ dependencies {
     implementation(libs.pager)
     implementation(libs.pager.indicators)
 
+    implementation(libs.lottie.compose)
+
     debugImplementation(libs.bundles.compose.debug)
 
     testImplementation(libs.junit.test)

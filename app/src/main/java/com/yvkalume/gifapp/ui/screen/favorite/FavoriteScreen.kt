@@ -1,6 +1,7 @@
 package com.yvkalume.gifapp.ui.screen.favorite
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -26,8 +27,8 @@ import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
 import com.yvkalume.gifapp.R
 import com.yvkalume.gifapp.ui.screen.favorite.logic.FavoriteViewModel
-import com.yvkalume.gifapp.ui.screen.home.components.GifListView
-import com.yvkalume.gifapp.ui.screen.home.components.StickerListView
+import com.yvkalume.gifapp.ui.components.GifListView
+import com.yvkalume.gifapp.ui.components.StickerListView
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
@@ -89,6 +90,7 @@ fun FavoriteScreen(homeViewModel: FavoriteViewModel = hiltViewModel()) {
 						when (pagerState.currentPage) {
 								0 -> {
 										StickerListView(
+												modifier = Modifier.fillMaxSize(),
 												uiState = stickersState,
 												onFavoriteClick = {
 														homeViewModel.removerFavorite(it)
@@ -97,6 +99,7 @@ fun FavoriteScreen(homeViewModel: FavoriteViewModel = hiltViewModel()) {
 								}
 								1 -> {
 										GifListView(
+												modifier = Modifier.fillMaxSize(),
 												uiState = gifsState,
 												onFavoriteClick = {
 														homeViewModel.removeFavorite(it)

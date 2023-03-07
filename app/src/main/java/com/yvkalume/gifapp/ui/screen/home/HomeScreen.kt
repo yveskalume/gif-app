@@ -26,8 +26,8 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
 import com.yvkalume.gifapp.R
-import com.yvkalume.gifapp.ui.screen.home.components.GifListView
-import com.yvkalume.gifapp.ui.screen.home.components.StickerListView
+import com.yvkalume.gifapp.ui.components.GifListView
+import com.yvkalume.gifapp.ui.components.StickerListView
 import com.yvkalume.gifapp.ui.screen.home.logic.HomeViewModel
 import com.yvkalume.gifapp.ui.theme.GifAppTheme
 import kotlinx.coroutines.launch
