@@ -1,5 +1,6 @@
 package com.yvkalume.gifapp.data.repository
 
+import android.util.Log
 import com.yvkalume.gifapp.data.datasource.sticker.StickerLocalDataSource
 import com.yvkalume.gifapp.data.datasource.sticker.StickerRemoteDataSource
 import com.yvkalume.gifapp.data.model.mapper.StickerEntityMapper
@@ -23,10 +24,14 @@ class StickerRepository @Inject constructor(
 
 		private fun updateLocalCache() {
 				coroutineScope.launch(coroutineDispatcher) {
-						val response = remoteDataSource.getAllTrending()
-						if (response.meta.status == 200) {
-								val stickerEntities = StickerEntityMapper.mapList(response.data)
-								localDataSource.insertAll(stickerEntities.toTypedArray())
+						try {
+								val response = remoteDataSource.getAllTrending()
+								if (response.meta.status == 200) {
+										val stickerEntities = StickerEntityMapper.mapList(response.data)
+										localDataSource.insertAll(stickerEntities.toTypedArray())
+								}
+						} catch (t: Throwable) {
+								Log.e("UpdateLocalCache",t.message.toString())
 						}
 				}
 		}
