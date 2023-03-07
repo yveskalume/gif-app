@@ -66,4 +66,39 @@ class StickerRepositoryTest {
 				}
 
 		}
+
+		private val stickers = listOf(
+				StickerEntity(
+						id = "giphyitem1",
+						title = "Giphy Item 1",
+						imageUrl = "https://imageurl.com/image.png"
+				),
+				StickerEntity(
+						id = "giphyitem2",
+						title = "Giphy Item 2",
+						imageUrl = "https://imageurl.com/image.png"
+				)
+		)
+
+		private val giphyHttpResponse = GiphyHttpResponse(
+				data = listOf(
+						GiphyItem(
+								id = "gitphyitem1",
+								title = "Lorem ipsum",
+								images = GifImage(
+										fixed_height = FixedHeight(
+												url = "https://image.com/image.png"
+										)
+								)
+						)
+				),
+				pagination = PaginationObject(
+						offset = 0,
+						total_count = 1,
+						count = 1
+				),
+				meta = MetaObject(
+						status = 200,
+				)
+		)
 }
