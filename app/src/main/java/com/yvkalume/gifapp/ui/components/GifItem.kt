@@ -59,6 +59,7 @@ fun GifItem(gif: Gif, modifier: Modifier = Modifier, onFavoriteClick: (Gif) -> U
 												add(GifDecoder.Factory())
 										}
 								}
+								.respectCacheHeaders(false)
 								.build(),
 						contentDescription = null,
 						contentScale = ContentScale.Crop,

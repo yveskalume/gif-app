@@ -65,6 +65,7 @@ fun StickerItem(
 												add(GifDecoder.Factory())
 										}
 								}
+								.respectCacheHeaders(false)
 								.build(),
 						contentDescription = null,
 						contentScale = ContentScale.FillHeight,
