@@ -2,6 +2,7 @@ package com.yvkalume.gifapp.data.room.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.yvkalume.gifapp.data.model.room.GifEntity
@@ -16,7 +17,7 @@ interface GifDao {
 		@Query("SELECT * FROM gifs WHERE id=:id LIMIT 1")
 		fun findById(id: String) : GifEntity
 
-		@Insert
+		@Insert(onConflict = OnConflictStrategy.IGNORE)
 		suspend fun insert(vararg gif: GifEntity)
 
 		@Update
