@@ -5,10 +5,7 @@ import com.yvkalume.gifapp.data.datasource.sticker.StickerLocalDataSource
 import com.yvkalume.gifapp.data.datasource.sticker.StickerRemoteDataSource
 import com.yvkalume.gifapp.data.model.mapper.StickerEntityMapper
 import com.yvkalume.gifapp.data.model.mapper.StickerMapper
-import com.yvkalume.gifapp.data.model.room.StickerEntity
 import com.yvkalume.gifapp.data.model.room.toEntity
-import com.yvkalume.gifapp.data.util.IoDispatcher
-import com.yvkalume.gifapp.data.util.Result
 import com.yvkalume.gifapp.domain.entity.Sticker
 import com.yvkalume.gifapp.domain.repository.StickerRepository
 import javax.inject.Inject
@@ -34,7 +31,7 @@ class StickerRepositoryImpl @Inject constructor(
 										localDataSource.insertAll(stickerEntities.toTypedArray())
 								}
 						} catch (t: Throwable) {
-								Log.e("UpdateLocalCache",t.message.toString())
+								Log.e("UpdateLocalCache", t.message.toString())
 						}
 				}
 		}
@@ -45,8 +42,9 @@ class StickerRepositoryImpl @Inject constructor(
 		}
 
 		override suspend fun update(sticker: Sticker) {
+				val updatedSticker = sticker.copy(updatedAt = System.currentTimeMillis())
 				coroutineScope.launch(coroutineDispatcher) {
-						localDataSource.update(sticker.toEntity())
+						localDataSource.update(updatedSticker.toEntity())
 				}
 		}
 

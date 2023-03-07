@@ -69,7 +69,8 @@ fun GifItem(gif: Gif, modifier: Modifier = Modifier, onFavoriteClick: (Gif) -> U
 						modifier = Modifier
 								.fillMaxWidth()
 								.padding(horizontal = 16.dp),
-						horizontalArrangement = Arrangement.SpaceBetween
+						horizontalArrangement = Arrangement.SpaceBetween,
+						verticalAlignment = Alignment.CenterVertically
 				) {
 						LikeIcon(
 								isChecked = gif.isFavorite,

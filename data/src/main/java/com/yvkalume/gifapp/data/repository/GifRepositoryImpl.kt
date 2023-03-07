@@ -42,8 +42,9 @@ class GifRepositoryImpl @Inject constructor(
 		}
 
 		override suspend fun update(gif: Gif) {
+				val updatedGif = gif.copy(updatedAt = System.currentTimeMillis())
 				coroutineScope.launch(coroutineDispatcher) {
-						localDataSource.update(gif.toEntity())
+						localDataSource.update(updatedGif.toEntity())
 				}
 		}
 
