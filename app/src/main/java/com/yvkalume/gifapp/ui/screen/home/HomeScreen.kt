@@ -54,7 +54,7 @@ fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
 								Text(
 										text = stringResource(id = R.string.app_name),
 										style = MaterialTheme.typography.h1,
-										modifier = Modifier.padding(vertical = 8.dp)
+										modifier = Modifier.padding(top = 16.dp)
 								)
 
 								TabRow(

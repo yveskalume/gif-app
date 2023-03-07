@@ -52,9 +52,9 @@ fun RootScreen(modifier: Modifier = Modifier) {
 																imageVector = destination.icon,
 																contentDescription = stringResource(id = destination.label),
 																tint = if (currentDestination.isCurrent(destination.route)) {
-																		Color.Black
-																} else {
 																		MaterialTheme.colors.primary
+																} else {
+																		Color.Black
 																}
 														)
 												},
@@ -62,9 +62,9 @@ fun RootScreen(modifier: Modifier = Modifier) {
 														Text(
 																text = stringResource(id = destination.label),
 																color = if (currentDestination.isCurrent(destination.route)) {
-																		Color.Black
-																} else {
 																		MaterialTheme.colors.primary
+																} else {
+																		Color.Black
 																}
 														)
 												}

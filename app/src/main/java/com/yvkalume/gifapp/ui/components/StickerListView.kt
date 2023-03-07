@@ -1,6 +1,7 @@
 package com.yvkalume.gifapp.ui.screen.home.components
 
-import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -12,6 +13,7 @@ import com.yvkalume.gifapp.domain.entity.Sticker
 import com.yvkalume.gifapp.ui.components.StickerItem
 import com.yvkalume.gifapp.ui.screen.home.logic.HomeUiState
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun StickerListView(
 		modifier: Modifier = Modifier,
@@ -19,28 +21,30 @@ fun StickerListView(
 		onFavoriteClick: (Sticker) -> Unit
 ) {
 
-		Crossfade(targetState = uiState) { state ->
-				when (state) {
-						is HomeUiState.Error -> {
-								Text(text = state.message)
-						}
-						HomeUiState.Loading -> {
-								CircularProgressIndicator()
-						}
-						is HomeUiState.Success<*> -> {
-								val stickers = (state.data as? List<Sticker>) ?: emptyList()
-								LazyColumn(
-										modifier = modifier.fillMaxSize(),
-										content = {
-												items(items = stickers, key = { it.id }) { sticker ->
-														StickerItem(
-																sticker = sticker,
-																onFavoriteClick = onFavoriteClick
+		when (uiState) {
+				is HomeUiState.Error -> {
+						Text(text = uiState.message)
+				}
+				HomeUiState.Loading -> {
+						CircularProgressIndicator()
+				}
+				is HomeUiState.Success<*> -> {
+						val stickers = (uiState.data as? List<Sticker>) ?: emptyList()
+						LazyColumn(
+								modifier = modifier.fillMaxSize(),
+								content = {
+										items(items = stickers, key = { it.id }) { sticker ->
+												StickerItem(
+														sticker = sticker,
+														onFavoriteClick = onFavoriteClick,
+														modifier = Modifier.animateItemPlacement(
+																animationSpec = tween(2000)
 														)
-												}
+												)
 										}
-								)
-						}
+								}
+						)
 				}
 		}
+
 }

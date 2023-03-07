@@ -52,7 +52,7 @@ fun FavoriteScreen(homeViewModel: FavoriteViewModel = hiltViewModel()) {
 								Text(
 										text = stringResource(id = R.string.favorites),
 										style = MaterialTheme.typography.h2,
-										modifier = Modifier.padding(vertical = 8.dp)
+										modifier = Modifier.padding(top = 16.dp)
 								)
 
 								TabRow(
