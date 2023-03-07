@@ -49,4 +49,8 @@ class StickerRepositoryImpl @Inject constructor(
 						localDataSource.update(sticker.toEntity())
 				}
 		}
+
+		override fun getFavorites(): Flow<List<Sticker>> {
+				return localDataSource.getFavorites().map { StickerMapper.mapList(it) }
+		}
 }

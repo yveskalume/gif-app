@@ -46,4 +46,8 @@ class GifRepositoryImpl @Inject constructor(
 						localDataSource.update(gif.toEntity())
 				}
 		}
+
+		override fun getFavorites(): Flow<List<Gif>> {
+				return localDataSource.getFavorites().map { GifMapper.mapList(it) }
+		}
 }

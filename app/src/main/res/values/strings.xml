@@ -5,4 +5,7 @@
         <item>Stickers</item>
         <item>Gifs</item>
     </string-array>
+
+    <string name="home">Home</string>
+    <string name="favorites">Favorites</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.yvkalume.gifapp.ui.components
 
 import android.os.Build
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,7 +31,7 @@ import coil.compose.SubcomposeAsyncImage
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import com.yvkalume.gifapp.domain.entity.Sticker
-import com.yvkalume.gifapp.ui.extension.shimmer
+import com.yvkalume.gifapp.ui.util.shimmer
 
 @Composable
 fun StickerItem(

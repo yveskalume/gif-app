@@ -31,7 +31,7 @@ import coil.compose.SubcomposeAsyncImage
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import com.yvkalume.gifapp.domain.entity.Gif
-import com.yvkalume.gifapp.ui.extension.shimmer
+import com.yvkalume.gifapp.ui.util.shimmer
 
 @Composable
 fun GifItem(gif: Gif, modifier: Modifier = Modifier, onFavoriteClick: (Gif) -> Unit) {

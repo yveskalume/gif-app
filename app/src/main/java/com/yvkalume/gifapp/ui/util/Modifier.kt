@@ -1,4 +1,4 @@
-package com.yvkalume.gifapp.ui.extension
+package com.yvkalume.gifapp.ui.util
 
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode

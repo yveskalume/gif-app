@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.yvkalume.gifapp.ui.screen.home.HomeScreen
+import com.yvkalume.gifapp.ui.screen.root.RootScreen
 import com.yvkalume.gifapp.ui.theme.GifAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,22 +26,9 @@ class MainActivity : ComponentActivity() {
 										modifier = Modifier.fillMaxSize(),
 										color = MaterialTheme.colors.background
 								) {
-										HomeScreen()
+										RootScreen()
 								}
 						}
 				}
-		}
-}
-
-@Composable
-fun Greeting(name: String) {
-		Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-		GifAppTheme {
-				Greeting("Android")
 		}
 }

@@ -8,15 +8,15 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.yvkalume.gifapp.domain.entity.Gif
-import com.yvkalume.gifapp.ui.components.GifItem
+import com.yvkalume.gifapp.domain.entity.Sticker
+import com.yvkalume.gifapp.ui.components.StickerItem
 import com.yvkalume.gifapp.ui.screen.home.logic.HomeUiState
 
 @Composable
-fun GifListView(
+fun StickerListView(
 		modifier: Modifier = Modifier,
 		uiState: HomeUiState,
-		onFavoriteClick: (Gif) -> Unit
+		onFavoriteClick: (Sticker) -> Unit
 ) {
 
 		Crossfade(targetState = uiState) { state ->
@@ -28,12 +28,15 @@ fun GifListView(
 								CircularProgressIndicator()
 						}
 						is HomeUiState.Success<*> -> {
-								val gifs = (state.data as? List<Gif>) ?: emptyList()
+								val stickers = (state.data as? List<Sticker>) ?: emptyList()
 								LazyColumn(
 										modifier = modifier.fillMaxSize(),
 										content = {
-												items(gifs) { gif ->
-														GifItem(gif = gif, onFavoriteClick = onFavoriteClick)
+												items(items = stickers, key = { it.id }) { sticker ->
+														StickerItem(
+																sticker = sticker,
+																onFavoriteClick = onFavoriteClick
+														)
 												}
 										}
 								)
