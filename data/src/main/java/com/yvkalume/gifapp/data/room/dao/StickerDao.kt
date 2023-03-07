@@ -2,6 +2,7 @@ package com.yvkalume.gifapp.data.room.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.yvkalume.gifapp.data.model.room.GifEntity
@@ -17,7 +18,7 @@ interface StickerDao {
 		@Query("SELECT * FROM stickers WHERE id=:id LIMIT 1")
 		fun findById(id: String) : StickerEntity
 
-		@Insert
+		@Insert(onConflict = OnConflictStrategy.ABORT)
 		suspend fun insert(vararg gif: StickerEntity)
 
 		@Update
