@@ -10,7 +10,7 @@ class GifLocalDataSource @Inject constructor(private val gifDao: GifDao) {
 
 		fun findById(id: String): GifEntity = gifDao.findById(id)
 
-		suspend fun insertAll(stickers: Array<GifEntity>) = gifDao.insert(*stickers)
+		suspend fun insertAll(gif: Array<GifEntity>) = gifDao.insert(*gif)
 
 		suspend fun insert(sticker: GifEntity) = gifDao.insert(sticker)
 

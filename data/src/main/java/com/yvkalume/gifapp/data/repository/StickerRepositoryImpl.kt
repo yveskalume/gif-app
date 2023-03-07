@@ -6,6 +6,7 @@ import com.yvkalume.gifapp.data.datasource.sticker.StickerRemoteDataSource
 import com.yvkalume.gifapp.data.model.mapper.StickerEntityMapper
 import com.yvkalume.gifapp.data.model.mapper.StickerMapper
 import com.yvkalume.gifapp.data.model.room.StickerEntity
+import com.yvkalume.gifapp.data.model.room.toEntity
 import com.yvkalume.gifapp.data.util.IoDispatcher
 import com.yvkalume.gifapp.data.util.Result
 import com.yvkalume.gifapp.domain.entity.Sticker
@@ -41,5 +42,11 @@ class StickerRepositoryImpl @Inject constructor(
 		override fun getAllTrending(): Flow<List<Sticker>> {
 				updateLocalCache()
 				return localDataSource.getAll().map { StickerMapper.mapList(it) }
+		}
+
+		override suspend fun update(sticker: Sticker) {
+				coroutineScope.launch(coroutineDispatcher) {
+						localDataSource.update(sticker.toEntity())
+				}
 		}
 }

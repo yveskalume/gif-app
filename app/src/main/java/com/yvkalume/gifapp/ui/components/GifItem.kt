@@ -13,13 +13,16 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -27,11 +30,11 @@ import coil.ImageLoader
 import coil.compose.SubcomposeAsyncImage
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
-import com.valentinilk.shimmer.shimmer
 import com.yvkalume.gifapp.domain.entity.Gif
+import com.yvkalume.gifapp.ui.extension.shimmer
 
 @Composable
-fun GifItem(gif: Gif, modifier: Modifier = Modifier) {
+fun GifItem(gif: Gif, modifier: Modifier = Modifier, onFavoriteClick: (Gif) -> Unit) {
 		val context = LocalContext.current
 		Column(modifier = Modifier.wrapContentHeight()) {
 				SubcomposeAsyncImage(
@@ -68,7 +71,17 @@ fun GifItem(gif: Gif, modifier: Modifier = Modifier) {
 								.padding(horizontal = 16.dp),
 						horizontalArrangement = Arrangement.SpaceBetween
 				) {
-						Icon(imageVector = Icons.Rounded.Favorite, contentDescription = null)
+						IconButton(onClick = { onFavoriteClick(gif) }) {
+								Icon(
+										imageVector = if (gif.isFavorite) {
+												Icons.Rounded.Favorite
+										} else {
+												Icons.Outlined.Favorite
+										},
+										contentDescription = "Add ${gif.title} to favorite",
+										tint = if (gif.isFavorite) Color.Red else Color.Gray
+								)
+						}
 						Icon(imageVector = Icons.Rounded.Share, contentDescription = null)
 				}
 		}

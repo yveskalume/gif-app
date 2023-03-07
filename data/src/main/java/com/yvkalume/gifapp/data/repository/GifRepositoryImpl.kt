@@ -5,6 +5,7 @@ import com.yvkalume.gifapp.data.datasource.gif.GifLocalDataSource
 import com.yvkalume.gifapp.data.datasource.gif.GifRemoteDataSource
 import com.yvkalume.gifapp.data.model.mapper.GifEntityMapper
 import com.yvkalume.gifapp.data.model.mapper.GifMapper
+import com.yvkalume.gifapp.data.model.room.toEntity
 import com.yvkalume.gifapp.domain.entity.Gif
 import com.yvkalume.gifapp.domain.repository.GifRepository
 import javax.inject.Inject
@@ -38,5 +39,11 @@ class GifRepositoryImpl @Inject constructor(
 		override fun getAllTrending(): Flow<List<Gif>> {
 				updateLocalCache()
 				return localDataSource.getAll().map { GifMapper.mapList(it) }
+		}
+
+		override suspend fun update(gif: Gif) {
+				coroutineScope.launch(coroutineDispatcher) {
+						localDataSource.update(gif.toEntity())
+				}
 		}
 }

@@ -13,7 +13,11 @@ import com.yvkalume.gifapp.ui.components.GifItem
 import com.yvkalume.gifapp.ui.screen.home.logic.HomeUiState
 
 @Composable
-fun GifListView(modifier: Modifier = Modifier, uiState: HomeUiState) {
+fun GifListView(
+		modifier: Modifier = Modifier,
+		uiState: HomeUiState,
+		onFavoriteClick: (Gif) -> Unit
+) {
 
 		Crossfade(targetState = uiState) { state ->
 				when (state) {
@@ -29,7 +33,7 @@ fun GifListView(modifier: Modifier = Modifier, uiState: HomeUiState) {
 										modifier = modifier.fillMaxSize(),
 										content = {
 												items(gifs) { gif ->
-														GifItem(gif = gif)
+														GifItem(gif = gif, onFavoriteClick = onFavoriteClick)
 												}
 										}
 								)

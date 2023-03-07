@@ -1,6 +1,7 @@
 package com.yvkalume.gifapp.ui.components
 
 import android.os.Build
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,13 +14,16 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -27,11 +31,16 @@ import coil.ImageLoader
 import coil.compose.SubcomposeAsyncImage
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
-import com.valentinilk.shimmer.shimmer
 import com.yvkalume.gifapp.domain.entity.Sticker
+import com.yvkalume.gifapp.ui.extension.shimmer
 
 @Composable
-fun StickerItem(sticker: Sticker, modifier: Modifier = Modifier) {
+fun StickerItem(
+		sticker: Sticker,
+		modifier: Modifier = Modifier,
+		onFavoriteClick: (Sticker) -> Unit
+) {
+
 		val context = LocalContext.current
 		Column(modifier = Modifier.wrapContentHeight()) {
 				SubcomposeAsyncImage(
@@ -68,7 +77,17 @@ fun StickerItem(sticker: Sticker, modifier: Modifier = Modifier) {
 								.padding(horizontal = 16.dp),
 						horizontalArrangement = Arrangement.SpaceBetween
 				) {
-						Icon(imageVector = Icons.Rounded.Favorite, contentDescription = null)
+						IconButton(onClick = { onFavoriteClick(sticker) }) {
+								Icon(
+										imageVector = if (sticker.isFavorite) {
+												Icons.Rounded.Favorite
+										} else {
+												Icons.Outlined.Favorite
+										},
+										contentDescription = "Add ${sticker.title} to favorite",
+										tint = if (sticker.isFavorite) Color.Red else Color.Gray
+								)
+						}
 						Icon(imageVector = Icons.Rounded.Share, contentDescription = null)
 				}
 		}
