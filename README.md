@@ -1,7 +1,7 @@
 <h1 align="center">GifApp</h1><br>
 <p align="center">  
 GifApp is an Android application built using jetpack compose and other modern Android technology stacks and the MVVM architecture. 
-The application just shows Gif images from [Giphy](https://developers.giphy.com) API rest
+  The application just shows Gif images from <a href="https://developers.giphy.com">Giphy</a> API rest
 </p>
 <br>
 
