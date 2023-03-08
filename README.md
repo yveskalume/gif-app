@@ -13,12 +13,12 @@ GifApp is an Android application built using jetpack compose and other modern An
 ## Download
 Go to the [Releases](https://github.com/eric-ampire/lottiefiles-app/releases) to download the latest APK.
 
-<!-- ## Screenshots
+## Screenshots
 <p align="center">
-  <img src="/preview/preview_01.gif" width="32%"/>
-  <img src="/preview/preview_02.gif" width="32%"/>
-  <img src="/preview/preview_03.gif" width="32%"/>
-</p> -->
+  <img src="/preview/preview1.gif" width="32%"/>
+  <img src="/preview/preview2.gif" width="32%"/>
+  <img src="/preview/preview3.gif" width="32%"/>
+</p>
 
 ## Tech stack & Open-source libraries
 - Minimum SDK level 24
