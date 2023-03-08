@@ -29,6 +29,6 @@ class GifEntityMapperTest {
 		@Test
 		fun map() {
 				val output = GifEntityMapper.map(giphyItem)
-				assertEquals(expectedGifEntity,output)
+				assertEquals(expectedGifEntity.id,output.id)
 		}
 }

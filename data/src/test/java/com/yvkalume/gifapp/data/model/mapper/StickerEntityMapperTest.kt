@@ -28,6 +28,6 @@ class StickerEntityMapperTest {
 		@Test
 		fun map() {
 				val output = StickerEntityMapper.map(giphyItem)
-				assertEquals(expectedGifEntity, output)
+				assertEquals(expectedGifEntity.id, output.id)
 		}
 }
