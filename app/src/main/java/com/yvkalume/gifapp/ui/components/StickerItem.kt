@@ -1,5 +1,6 @@
 package com.yvkalume.gifapp.ui.components
 
+import android.graphics.Bitmap
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,15 +10,21 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.yvkalume.gifapp.domain.entity.Sticker
+import com.yvkalume.gifapp.util.saveAndShare
 
 @Composable
 fun StickerItem(
@@ -26,8 +33,20 @@ fun StickerItem(
 		onFavoriteClick: (Sticker) -> Unit
 ) {
 
+		val context = LocalContext.current
+
+		var imageDrawable by remember {
+				mutableStateOf<Bitmap?>(null)
+		}
+
 		Column(modifier = Modifier.wrapContentHeight()) {
-				CustomImageView(imageUrl = sticker.imageUrl, contentScale = ContentScale.FillHeight)
+				CustomImageView(
+						imageUrl = sticker.imageUrl,
+						contentScale = ContentScale.FillHeight,
+						onImageLoaded = {
+								imageDrawable = it
+						}
+				)
 				Row(
 						modifier = Modifier
 								.fillMaxWidth()
@@ -40,7 +59,14 @@ fun StickerItem(
 								onClick = { onFavoriteClick(sticker) },
 								modifier = Modifier.size(52.dp)
 						)
-						Icon(imageVector = Icons.Rounded.Share, contentDescription = null)
+
+						IconButton(
+								onClick = {
+										imageDrawable.saveAndShare(context, sticker.title)
+								}
+						) {
+								Icon(imageVector = Icons.Rounded.Share, contentDescription = null)
+						}
 				}
 		}
 

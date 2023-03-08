@@ -1,5 +1,7 @@
 package com.yvkalume.gifapp.ui.components
 
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.graphics.drawable.toBitmap
 import coil.ImageLoader
 import coil.compose.SubcomposeAsyncImage
 import coil.decode.GifDecoder
@@ -27,7 +30,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 fun CustomImageView(
 		modifier: Modifier = Modifier,
 		imageUrl: String,
-		contentScale: ContentScale = ContentScale.Crop
+		contentScale: ContentScale = ContentScale.Crop,
+		onImageLoaded: (Bitmap?) -> Unit = {}
 ) {
 		val context = LocalContext.current
 		val dispatcher = Dispatchers.IO.limitedParallelism(5)
@@ -60,6 +64,10 @@ fun CustomImageView(
 						.build(),
 				contentDescription = null,
 				contentScale = contentScale,
-				alignment = Alignment.Center
+				alignment = Alignment.Center,
+				onSuccess = {
+						val bitmap = it.result.drawable.toBitmap()
+						onImageLoaded(bitmap)
+				}
 		)
 }
