@@ -37,6 +37,7 @@ fun GifItem(gif: Gif, modifier: Modifier = Modifier, onFavoriteClick: (Gif) -> U
 
 		Column(modifier = Modifier.wrapContentHeight()) {
 				CustomImageView(
+						modifier = modifier,
 						imageUrl = gif.imageUrl,
 						contentScale = ContentScale.Crop,
 						onImageLoaded = { imageDrawable = it }

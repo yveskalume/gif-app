@@ -41,6 +41,7 @@ fun StickerItem(
 
 		Column(modifier = Modifier.wrapContentHeight()) {
 				CustomImageView(
+						modifier = modifier,
 						imageUrl = sticker.imageUrl,
 						contentScale = ContentScale.FillHeight,
 						onImageLoaded = {
