@@ -49,10 +49,14 @@ Create an account in order to have an api key and put it in `secrets.properties`
 ```
 giphyApiKey=Your Api Key
 ```
+
+## Find this repository useful? :heart:
+Support it by joining __[stargazers](https://github.com/yveskalume/gif-app/stargazers)__ for this repository. :star:
+
 # License
 
 ```
-Designed and developed by 2020 ericampire (Eric Ampire)
+Designed and developed by 2020 yveskalume (Yves Kalume)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
