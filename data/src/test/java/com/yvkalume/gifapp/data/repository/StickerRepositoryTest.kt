@@ -60,8 +60,7 @@ class StickerRepositoryTest {
 
 				val result = stickerRepository.getAllTrending()
 				result.collect {
-						assert(it is com.yvkalume.gifapp.data.util.Result.Success)
-						assert(it.data?.size == 2)
+						assert(it.size == 2)
 				}
 
 		}
@@ -70,12 +69,16 @@ class StickerRepositoryTest {
 				StickerEntity(
 						id = "giphyitem1",
 						title = "Giphy Item 1",
-						imageUrl = "https://imageurl.com/image.png"
+						imageUrl = "https://imageurl.com/image.png",
+						createdAt = System.currentTimeMillis(),
+						updatedAt = System.currentTimeMillis()
 				),
 				StickerEntity(
 						id = "giphyitem2",
 						title = "Giphy Item 2",
-						imageUrl = "https://imageurl.com/image.png"
+						imageUrl = "https://imageurl.com/image.png",
+						createdAt = System.currentTimeMillis(),
+						updatedAt = System.currentTimeMillis()
 				)
 		)
 

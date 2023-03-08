@@ -21,7 +21,9 @@ class GifEntityMapperTest {
 		val expectedGifEntity = GifEntity(
 				id = "giphyitem1",
 				title = "Giphy Item 1",
-				imageUrl = "https://imageurl.com/image.png"
+				imageUrl = "https://imageurl.com/image.png",
+				createdAt = 100000,
+				updatedAt = 100000
 		)
 
 		@Test

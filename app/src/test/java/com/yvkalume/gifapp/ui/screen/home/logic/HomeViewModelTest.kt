@@ -1,5 +1,6 @@
 package com.yvkalume.gifapp.ui.screen.home.logic
 
+import com.yvkalume.gifapp.data.model.mapper.GifMapper
 import com.yvkalume.gifapp.data.model.room.GifEntity
 import com.yvkalume.gifapp.data.repository.GifRepositoryImpl
 import com.yvkalume.gifapp.data.repository.StickerRepositoryImpl
@@ -41,7 +42,7 @@ class HomeViewModelTest {
 		@Test
 		fun `gifs state is success when result is success`() = runTest {
 				val collectJob = launch(UnconfinedTestDispatcher()) { homeViewModel.gifs.collect() }
-				every { gifRepository.getAllTrending() } returns  flowOf(Result.Success(gifs))
+				every { gifRepository.getAllTrending() } returns  flowOf(GifMapper.mapList(gifs))
 
 				gifRepository.getAllTrending()
 
@@ -57,7 +58,9 @@ class HomeViewModelTest {
 				GifEntity(
 						id = "1",
 						title = "Lorem ipsum",
-						imageUrl = "https://image.com/image.png"
+						imageUrl = "https://image.com/image.png",
+						createdAt = System.currentTimeMillis(),
+						updatedAt = System.currentTimeMillis()
 				)
 		)
 
@@ -65,7 +68,9 @@ class HomeViewModelTest {
 				GifEntity(
 						id = "1",
 						title = "Lorem ipsum",
-						imageUrl = "https://image.com/image.png"
+						imageUrl = "https://image.com/image.png",
+						createdAt = System.currentTimeMillis(),
+						updatedAt = System.currentTimeMillis()
 				)
 		)
 
