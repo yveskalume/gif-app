@@ -10,9 +10,6 @@ GifApp is an Android application built using jetpack compose and other modern An
   <a href="https://android-arsenal.com/api?level=24"><img alt="API" src="https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat"/></a>
 </p>
 
-## Download
-Go to the [Releases](https://github.com/eric-ampire/lottiefiles-app/releases) to download the latest APK.
-
 ## Screenshots
 <p align="center">
   <img src="/preview/preview1.gif" width="32%"/>
@@ -22,17 +19,24 @@ Go to the [Releases](https://github.com/eric-ampire/lottiefiles-app/releases) to
 
 ## Tech stack & Open-source libraries
 - Minimum SDK level 24
-- 100% [Kotlin](https://kotlinlang.org/) based + [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/) for asynchronous.
-- Hilt for dependency injection.
+- 100% [Kotlin](https://kotlinlang.org/) 
+- [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/) to simplify code that executes asynchronously.
 - JetPack
-    - Compose - A modern toolkit for building native Android UI.
-    - Coroutines Flow - notify domain layer data to views.
-    - Lifecycle - dispose observing data when lifecycle state changes.
-    - ViewModel - UI related data holder, lifecycle aware.
-    - Room Persistence - construct database.
-- Material Design
-- [Lottie Android](https://airbnb.design/lottie/) - Lottie is a library that renders After Effects animations in real time, allowing apps to use animations as easily as they use static images.
-- [Ktor](https://github.com/square/retrofit) - construct the REST APIs and paging network data.
+    - [Compose](https://developer.android.com/jetpack/compose) - A modern toolkit for building native Android UI.
+    - [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - for dependency injection.
+    - [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle) - dispose observing data when lifecycle state changes.
+    - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - UI related data holder, lifecycle aware.
+    - [Room](https://developer.android.com/training/data-storage/room) - to construct database and persist data more easily.
+- [Material Design](https://developer.android.com/jetpack/compose/designsystems) - Material Design comes with a rich set of Material components
+- [Lottie Android](https://github.com/airbnb/lottie-android) - Render After Effects animations natively on Android
+- [Ktor](https://github.com/square/retrofit) - consume the REST APIs.
+- [Accompanist Pager](https://google.github.io/accompanist/pager/) - A library which provides paging layouts for Jetpack Compose.
+- [Coil](https://coil-kt.github.io/coil/compose/) - An image loading library for Android backed by Kotlin Coroutines.
+- [JUnit](https://developer.android.com/training/testing/local-tests) - a “Unit Testing” framework
+- [Mockk](https://mockk.io) - Mocking library for Kotlin
+- [Chucker](https://github.com/ChuckerTeam/chucker) - An HTTP inspector for Android & OkHTTP
+- [Secrets Gradle Plugin for Android](https://github.com/google/secrets-gradle-plugin) - A Gradle plugin for providing secrets to Android project.
+- [Faker](https://serpro69.github.io/kotlin-faker/) - kotlin-faker is a data-generation library intended for use during development and testing
 
 # License
 
