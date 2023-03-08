@@ -1,6 +1,6 @@
-<h1 align="center">GifApp</h1><br>
+<h1 align="center">Gif App</h1><br>
 <p align="center">  
-GifApp is an Android application built using jetpack compose and other modern Android technology stacks and the MVVM architecture. 
+Gif App is an Android application built using jetpack compose and other modern Android technology stacks and the MVVM architecture. 
   The application just shows Gif images from <a href="https://developers.giphy.com">Giphy</a> API rest
 </p>
 <br>
@@ -30,6 +30,7 @@ GifApp is an Android application built using jetpack compose and other modern An
 - [Material Design](https://developer.android.com/jetpack/compose/designsystems) - Material Design comes with a rich set of Material components
 - [Lottie Android](https://github.com/airbnb/lottie-android) - Render After Effects animations natively on Android
 - [Ktor](https://github.com/square/retrofit) - consume the REST APIs.
+- [KSP](https://github.com/google/ksp) - Kotlin Symbol Processing API.
 - [Accompanist Pager](https://google.github.io/accompanist/pager/) - A library which provides paging layouts for Jetpack Compose.
 - [Coil](https://coil-kt.github.io/coil/compose/) - An image loading library for Android backed by Kotlin Coroutines.
 - [JUnit](https://developer.android.com/training/testing/local-tests) - a “Unit Testing” framework
@@ -38,6 +39,12 @@ GifApp is an Android application built using jetpack compose and other modern An
 - [Secrets Gradle Plugin for Android](https://github.com/google/secrets-gradle-plugin) - A Gradle plugin for providing secrets to Android project.
 - [Faker](https://serpro69.github.io/kotlin-faker/) - kotlin-faker is a data-generation library intended for use during development and testing
 
+# Setup & Installation
+Gif App is using the [Giphy Api](https://developers.giphy.com/docs/api/#quick-start-guide) for constructing RESTful API.
+Create an account in order to have an api key and put it in `secrets.properties` file as following
+```
+giphyApiKey=Your Api Key
+```
 # License
 
 ```
