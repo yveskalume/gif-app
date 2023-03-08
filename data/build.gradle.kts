@@ -71,6 +71,9 @@ dependencies {
 		testImplementation(libs.room.test)
 
 		testImplementation(libs.faker)
+
+		debugImplementation(libs.chucker.debug)
+		releaseImplementation(libs.chucker.release)
 }
 
 secrets {
