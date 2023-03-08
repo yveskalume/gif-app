@@ -54,6 +54,7 @@ dependencies {
 		implementation(libs.ktor.android)
 		implementation(libs.ktor.serialization)
 		implementation(libs.ktor.contentnegotiation)
+		implementation(libs.ktor.okhttp)
 
 		implementation(libs.kotlin.serialization)
 
