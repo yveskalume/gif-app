@@ -19,6 +19,7 @@ mavericks = "3.0.2"
 core-ktx = "androidx.core:core-ktx:1.9.0"
 lifecycle-ktx = "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
 kotlin-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
+splashscreen = "androidx.core:core-splashscreen:1.0.0-beta02"
 
 # hilt
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
@@ -88,7 +89,7 @@ mavericks-compose = { module = "com.airbnb.android:mavericks-compose", version.r
 
 [bundles]
 core = ["core-ktx", "lifecycle-ktx"]
-compose = ["compose-ui-ui", "compose-ui-preview", "compose-ui-androidtest", "compose-icons", "compose-activity", "compose-material", "compose-navigation"]
+compose = ["compose-ui-ui", "compose-ui-preview", "compose-ui-androidtest", "compose-icons", "compose-activity", "compose-material", "compose-navigation","splashscreen"]
 compose-debug = ["compose-ui-tooling-debug", "compose-ui-debug"]
 pager = ["pager", "pager-indicators"]
 
