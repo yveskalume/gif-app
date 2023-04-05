@@ -1,7 +1,12 @@
 package com.yvkalume.gifapp.ui.screen.favorite.logic
 
-sealed interface FavoriteUiState {
-		data class Success<T>(val data: List<T>) : FavoriteUiState
-		data class Error(val message: String) : FavoriteUiState
-		object Loading : FavoriteUiState
-}
+import com.airbnb.mvrx.Async
+import com.airbnb.mvrx.MavericksState
+import com.airbnb.mvrx.Uninitialized
+import com.yvkalume.gifapp.domain.entity.Gif
+import com.yvkalume.gifapp.domain.entity.Sticker
+
+data class FavoriteUiState(
+	val gifs: Async<List<Gif>> = Uninitialized,
+	val stickers: Async<List<Sticker>> = Uninitialized,
+) : MavericksState

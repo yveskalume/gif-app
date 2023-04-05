@@ -9,59 +9,63 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.airbnb.mvrx.Async
+import com.airbnb.mvrx.Fail
+import com.airbnb.mvrx.Loading
+import com.airbnb.mvrx.Success
+import com.airbnb.mvrx.Uninitialized
 import com.yvkalume.gifapp.domain.entity.Gif
-import com.yvkalume.gifapp.ui.screen.home.logic.HomeUiState
 
 @Composable
 fun GifListView(
-		modifier: Modifier = Modifier,
-		uiState: HomeUiState,
-		onFavoriteClick: (Gif) -> Unit
+    modifier: Modifier = Modifier,
+    gifsState: () -> Async<List<Gif>>,
+    onFavoriteClick: (Gif) -> Unit
 ) {
 
-		Box(modifier = modifier, contentAlignment = Alignment.Center) {
-				when (uiState) {
-						is HomeUiState.Error -> {
-								EmptyView()
-						}
-						HomeUiState.Loading -> {
-								LoadingView()
-						}
-						is HomeUiState.Success<*> -> {
-								val gifs = (uiState.data as? List<Gif>) ?: emptyList()
-								GifListViewContent(
-										modifier = modifier,
-										gifs = gifs,
-										onFavoriteClick = onFavoriteClick
-								)
-						}
-				}
-		}
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+        when (gifsState()) {
+            is Fail -> {
+                EmptyView()
+            }
+            is Loading -> {
+                LoadingView()
+            }
+            is Success -> {
+                GifListViewContent(
+                    modifier = modifier,
+                    gifs = gifsState().invoke(),
+                    onFavoriteClick = onFavoriteClick
+                )
+            }
+            Uninitialized -> {}
+        }
+    }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun GifListViewContent(
-		modifier: Modifier = Modifier,
-		gifs: List<Gif>,
-		onFavoriteClick: (Gif) -> Unit
+    modifier: Modifier = Modifier,
+    gifs: List<Gif>?,
+    onFavoriteClick: (Gif) -> Unit
 ) {
-		if (gifs.isEmpty()) {
-				EmptyView()
-		} else {
-				LazyColumn(
-						modifier = modifier.fillMaxSize(),
-						content = {
-								items(items = gifs, key = { it.id }) { gif ->
-										GifItem(
-												gif = gif,
-												onFavoriteClick = onFavoriteClick,
-												modifier = Modifier.animateItemPlacement(
-														animationSpec = tween(2000)
-												)
-										)
-								}
-						}
-				)
-		}
+    if (gifs?.isEmpty() == true) {
+        EmptyView()
+    } else {
+        LazyColumn(
+            modifier = modifier.fillMaxSize(),
+            content = {
+                items(items = gifs!!, key = { it.id }) { gif ->
+                    GifItem(
+                        gif = gif,
+                        onFavoriteClick = onFavoriteClick,
+                        modifier = Modifier.animateItemPlacement(
+                            animationSpec = tween(2000)
+                        )
+                    )
+                }
+            }
+        )
+    }
 }

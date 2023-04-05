@@ -81,6 +81,9 @@ dependencies {
 
     implementation(libs.coroutine)
     testImplementation(libs.coroutine.test)
+
+    implementation(libs.mavericks)
+    implementation(libs.mavericks.compose)
 }
 
 kapt {

@@ -1,59 +1,63 @@
 package com.yvkalume.gifapp.ui.screen.favorite.logic
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.airbnb.mvrx.MavericksViewModel
+import com.airbnb.mvrx.MavericksViewModelFactory
+import com.yvkalume.gifapp.di.mavericks.AssistedViewModelFactory
+import com.yvkalume.gifapp.di.mavericks.hiltMavericksViewModelFactory
 import com.yvkalume.gifapp.domain.entity.Gif
 import com.yvkalume.gifapp.domain.entity.Sticker
 import com.yvkalume.gifapp.domain.repository.GifRepository
 import com.yvkalume.gifapp.domain.repository.StickerRepository
-import com.yvkalume.gifapp.ui.screen.home.logic.HomeUiState
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-@HiltViewModel
-class FavoriteViewModel @Inject constructor(
-		private val gifRepository: GifRepository,
-		private val stickerRepository: StickerRepository
-) : ViewModel() {
+class FavoriteViewModel @AssistedInject constructor(
+    @Assisted initialState: FavoriteUiState,
+    private val gifRepository: GifRepository,
+    private val stickerRepository: StickerRepository
+) : MavericksViewModel<FavoriteUiState>(initialState) {
 
-		val gifs: StateFlow<HomeUiState> = gifRepository.getFavorites().map { data ->
-				HomeUiState.Success(data)
-		}.catch {
-				HomeUiState.Error(it.message.toString())
-		}.stateIn(
-				scope = viewModelScope,
-				started = SharingStarted.WhileSubscribed(5_000L),
-				initialValue = HomeUiState.Loading
-		)
+    init {
+        getStickers()
+        getGifs()
+    }
 
+    private fun getGifs() {
+        gifRepository.getFavorites().execute {
+            copy(gifs = it)
+        }
+    }
 
-		val stickers: StateFlow<HomeUiState> = stickerRepository.getFavorites().map { data ->
-				HomeUiState.Success(data)
-		}.catch {
-				HomeUiState.Error(it.message.toString())
-		}.stateIn(
-				scope = viewModelScope,
-				started = SharingStarted.WhileSubscribed(5_000L),
-				initialValue = HomeUiState.Loading
-		)
+    private fun getStickers() {
+        stickerRepository.getFavorites().execute {
+            copy(stickers = it)
+        }
+    }
 
-		fun removerFavorite(sticker: Sticker) {
-				viewModelScope.launch {
-						val updatedSticker = sticker.copy(isFavorite = !sticker.isFavorite)
-						stickerRepository.update(updatedSticker)
-				}
-		}
-		fun removeFavorite(gif: Gif) {
-				viewModelScope.launch {
-						val updatedGif = gif.copy(isFavorite = !gif.isFavorite)
-						gifRepository.update(updatedGif)
-				}
-		}
+    fun removerFavorite(sticker: Sticker) {
+        viewModelScope.launch {
+            val updatedSticker = sticker.copy(isFavorite = !sticker.isFavorite)
+            stickerRepository.update(updatedSticker)
+        }
+    }
+
+    fun removeFavorite(gif: Gif) {
+        viewModelScope.launch {
+            val updatedGif = gif.copy(isFavorite = !gif.isFavorite)
+            gifRepository.update(updatedGif)
+        }
+    }
+
+    @AssistedFactory
+    interface Factory : AssistedViewModelFactory<FavoriteViewModel, FavoriteUiState> {
+        override fun create(state: FavoriteUiState): FavoriteViewModel
+    }
+
+    companion object :
+        MavericksViewModelFactory<FavoriteViewModel, FavoriteUiState> by hiltMavericksViewModelFactory()
 
 }

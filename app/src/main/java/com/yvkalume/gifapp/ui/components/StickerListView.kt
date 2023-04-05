@@ -9,61 +9,64 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.airbnb.mvrx.Async
+import com.airbnb.mvrx.Fail
+import com.airbnb.mvrx.Loading
+import com.airbnb.mvrx.Success
+import com.airbnb.mvrx.Uninitialized
 import com.yvkalume.gifapp.domain.entity.Sticker
-import com.yvkalume.gifapp.ui.components.StickerItem
-import com.yvkalume.gifapp.ui.screen.home.logic.HomeUiState
 
 @Composable
 fun StickerListView(
-		modifier: Modifier = Modifier,
-		uiState: HomeUiState,
-		onFavoriteClick: (Sticker) -> Unit
+    modifier: Modifier = Modifier,
+    stickersState: () -> Async<List<Sticker>>,
+    onFavoriteClick: (Sticker) -> Unit
 ) {
 
-		Box(modifier = modifier, contentAlignment = Alignment.Center) {
-				when (uiState) {
-						is HomeUiState.Error -> {
-								EmptyView()
-						}
-						HomeUiState.Loading -> {
-								LoadingView()
-						}
-						is HomeUiState.Success<*> -> {
-								val stickers = (uiState.data as? List<Sticker>) ?: emptyList()
-								StickerListViewContent(
-										modifier = modifier,
-										stickers = stickers,
-										onFavoriteClick = onFavoriteClick
-								)
-						}
-				}
-		}
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+        when (stickersState()) {
+            is Fail -> {
+                EmptyView()
+            }
+            is Loading -> {
+                LoadingView()
+            }
+            is Success -> {
+                StickerListViewContent(
+                    modifier = modifier,
+                    stickers = stickersState().invoke(),
+                    onFavoriteClick = onFavoriteClick
+                )
+            }
+            Uninitialized -> {}
+        }
+    }
 
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun StickerListViewContent(
-		stickers: List<Sticker>,
-		onFavoriteClick: (Sticker) -> Unit,
-		modifier: Modifier = Modifier
+    stickers: List<Sticker>?,
+    onFavoriteClick: (Sticker) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-		if (stickers.isEmpty()) {
-				EmptyView()
-		} else {
-				LazyColumn(
-						modifier = modifier.fillMaxSize(),
-						content = {
-								items(items = stickers, key = { it.id }) { sticker ->
-										StickerItem(
-												sticker = sticker,
-												onFavoriteClick = onFavoriteClick,
-												modifier = Modifier.animateItemPlacement(
-														animationSpec = tween(2000)
-												)
-										)
-								}
-						}
-				)
-		}
+    if (stickers?.isEmpty() == true) {
+        EmptyView()
+    } else {
+        LazyColumn(
+            modifier = modifier.fillMaxSize(),
+            content = {
+                items(items = stickers!!, key = { it.id }) { sticker ->
+                    StickerItem(
+                        sticker = sticker,
+                        onFavoriteClick = onFavoriteClick,
+                        modifier = Modifier.animateItemPlacement(
+                            animationSpec = tween(2000)
+                        )
+                    )
+                }
+            }
+        )
+    }
 }
