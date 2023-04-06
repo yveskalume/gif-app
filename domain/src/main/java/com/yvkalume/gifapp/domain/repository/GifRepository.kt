@@ -8,4 +8,5 @@ interface GifRepository {
 		fun getAllTrending(): Flow<PagingData<Gif>>
 		suspend fun update(gif: Gif)
 		fun getFavorites(): Flow<PagingData<Gif>>
+		suspend fun refresh()
 }

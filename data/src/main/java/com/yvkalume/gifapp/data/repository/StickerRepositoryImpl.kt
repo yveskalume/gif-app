@@ -27,20 +27,6 @@ class StickerRepositoryImpl @Inject constructor(
     private val coroutineDispatcher: CoroutineDispatcher
 ) : StickerRepository {
 
-    private fun updateLocalCache() {
-        coroutineScope.launch(coroutineDispatcher) {
-            try {
-                val response = remoteDataSource.getAllTrending()
-                if (response.meta.status == 200) {
-                    val stickerEntities = StickerEntityMapper.mapList(response.data)
-                    localDataSource.insertAll(stickerEntities.toTypedArray())
-                }
-            } catch (t: Throwable) {
-                Log.e("UpdateLocalCache", t.message.toString())
-            }
-        }
-    }
-
     override fun getAllTrending(): Flow<PagingData<Sticker>> {
         return Pager(
             config = PagingConfig(pageSize = 5),
@@ -60,5 +46,19 @@ class StickerRepositoryImpl @Inject constructor(
             config = PagingConfig(pageSize = 5),
             pagingSourceFactory = localDataSource::getFavoritesPaginated
         ).flow
+    }
+
+    override suspend fun refresh() {
+        coroutineScope.launch(coroutineDispatcher) {
+            try {
+                val response = remoteDataSource.getAllTrending()
+                if (response.meta.status == 200) {
+                    val stickerEntities = StickerEntityMapper.mapList(response.data)
+                    localDataSource.insertAll(stickerEntities.toTypedArray())
+                }
+            } catch (t: Throwable) {
+                Log.e("UpdateLocalCache", t.message.toString())
+            }
+        }
     }
 }

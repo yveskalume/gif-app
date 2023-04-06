@@ -27,20 +27,6 @@ class GifRepositoryImpl @Inject constructor(
     private val coroutineDispatcher: CoroutineDispatcher
 ) : GifRepository {
 
-    private fun updateLocalCache() {
-        coroutineScope.launch(coroutineDispatcher) {
-            try {
-                val response = remoteDataSource.getAllTrending()
-                if (response.meta.status == 200) {
-                    val gifEntities = GifEntityMapper.mapList(response.data)
-                    localDataSource.insertAll(gifEntities.toTypedArray())
-                }
-            } catch (t: Throwable) {
-                Log.e("UpdateLocalCache", t.message.toString())
-            }
-        }
-    }
-
     override fun getAllTrending(): Flow<PagingData<Gif>> {
         return Pager(
             config = PagingConfig(pageSize = 5),
@@ -60,5 +46,19 @@ class GifRepositoryImpl @Inject constructor(
             config = PagingConfig(pageSize = 5),
             pagingSourceFactory = localDataSource::getFavoritesPaginated
         ).flow.cachedIn(CoroutineScope(Dispatchers.IO))
+    }
+
+    override suspend fun refresh() {
+        coroutineScope.launch(coroutineDispatcher) {
+            try {
+                val response = remoteDataSource.getAllTrending()
+                if (response.meta.status == 200) {
+                    val gifEntities = GifEntityMapper.mapList(response.data)
+                    localDataSource.insertAll(gifEntities.toTypedArray())
+                }
+            } catch (t: Throwable) {
+                Log.e("UpdateLocalCache", t.message.toString())
+            }
+        }
     }
 }
