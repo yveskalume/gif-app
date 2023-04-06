@@ -51,6 +51,10 @@ Create an account in order to have an api key and put it in `secrets.properties`
 giphyApiKey=Your Api Key
 ```
 
+# Challenge and difficulties encountered
+- In order to make the loading a bit smoother, I had to add pagination on the data coming from the local database, but this led me to rethink my architecture in order to keep things simple.
+I had to remove the Mavericks viewmodels and I get the paginated data directly as viewmodel properties instead of going through a sealed class for example
+
 ## Find this repository useful? :heart:
 Support it by joining __[stargazers](https://github.com/yveskalume/gif-app/stargazers)__ for this repository. :star:
 
