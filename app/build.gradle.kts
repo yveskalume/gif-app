@@ -84,6 +84,8 @@ dependencies {
 
     implementation(libs.mavericks)
     implementation(libs.mavericks.compose)
+
+    implementation(libs.paging.compose)
 }
 
 kapt {

@@ -19,6 +19,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.airbnb.mvrx.compose.collectAsState
 import com.airbnb.mvrx.compose.mavericksViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -28,28 +30,27 @@ import com.google.accompanist.pager.rememberPagerState
 import com.yvkalume.gifapp.R
 import com.yvkalume.gifapp.ui.components.GifListView
 import com.yvkalume.gifapp.ui.components.StickerListView
-import com.yvkalume.gifapp.ui.screen.home.logic.HomeUiState
 import com.yvkalume.gifapp.ui.screen.home.logic.HomeViewModel
 import com.yvkalume.gifapp.ui.theme.GifAppTheme
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun HomeScreen(homeViewModel: HomeViewModel = mavericksViewModel()) {
+fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
     val context = LocalContext.current
     val pages = context.resources.getStringArray(R.array.gif_categories)
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
 
-    val gifsState by homeViewModel.collectAsState(HomeUiState::gifs)
-    val stickersState by homeViewModel.collectAsState(HomeUiState::stickers)
+    val gifs = homeViewModel.gifs.collectAsLazyPagingItems()
+    val stickers = homeViewModel.stickers.collectAsLazyPagingItems()
 
     Scaffold(
         topBar = {
             Column(
                 modifier = Modifier
-					.fillMaxWidth()
-					.wrapContentHeight(),
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
@@ -92,7 +93,7 @@ fun HomeScreen(homeViewModel: HomeViewModel = mavericksViewModel()) {
             when (pagerState.currentPage) {
                 0 -> {
                     StickerListView(
-                        stickersState = { stickersState },
+                        stickerItems = { stickers },
                         onFavoriteClick = {
                             homeViewModel.toggleFavorite(it)
                         }
@@ -100,7 +101,7 @@ fun HomeScreen(homeViewModel: HomeViewModel = mavericksViewModel()) {
                 }
                 1 -> {
                     GifListView(
-                        gifsState = { gifsState },
+                        gifItems = { gifs },
                         onFavoriteClick = {
                             homeViewModel.toggleFavorite(it)
                         }

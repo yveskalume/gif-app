@@ -32,7 +32,7 @@ Go to the [Releases](https://github.com/yveskalume/gif-app/releases) to download
     - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - UI related data holder, lifecycle aware.
     - [Room](https://developer.android.com/training/data-storage/room) - to construct database and persist data more easily.
 - [Material Design](https://developer.android.com/jetpack/compose/designsystems) - Material Design comes with a rich set of Material components
-- [Mavericks](https://airbnb.io/mavericks)Mavericks is the Android MVI framework from Airbnb.
+- [Mavericks](https://airbnb.io/mavericks) - Mavericks is the Android MVI framework from Airbnb.
 - [Lottie Android](https://github.com/airbnb/lottie-android) - Render After Effects animations natively on Android
 - [Ktor](https://github.com/square/retrofit) - consume the REST APIs.
 - [KSP](https://github.com/google/ksp) - Kotlin Symbol Processing API.

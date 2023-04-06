@@ -13,6 +13,7 @@ room = "2.5.0"
 lottie = "6.0.0"
 chucker = "3.5.2"
 mavericks = "3.0.2"
+paging = "3.1.1"
 
 [libraries]
 
@@ -87,9 +88,12 @@ chucker-release = { module = "com.github.chuckerteam.chucker:library-no-op", ver
 mavericks = { module = "com.airbnb.android:mavericks", version.ref = "mavericks" }
 mavericks-compose = { module = "com.airbnb.android:mavericks-compose", version.ref = "mavericks" }
 
+paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "paging" }
+paging-compose = "androidx.paging:paging-compose:1.0.0-alpha18"
+
 [bundles]
 core = ["core-ktx", "lifecycle-ktx"]
-compose = ["compose-ui-ui", "compose-ui-preview", "compose-ui-androidtest", "compose-icons", "compose-activity", "compose-material", "compose-navigation","splashscreen"]
+compose = ["compose-ui-ui", "compose-ui-preview", "compose-ui-androidtest", "compose-icons", "compose-activity", "compose-material", "compose-navigation", "splashscreen"]
 compose-debug = ["compose-ui-tooling-debug", "compose-ui-debug"]
 pager = ["pager", "pager-indicators"]
 
