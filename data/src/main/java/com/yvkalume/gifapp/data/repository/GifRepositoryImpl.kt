@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 class GifRepositoryImpl @Inject constructor(
@@ -29,11 +30,8 @@ class GifRepositoryImpl @Inject constructor(
     private val coroutineDispatcher: CoroutineDispatcher
 ) : GifRepository {
 
-    override fun getAllTrending(): Flow<PagingData<Gif>> {
-        return Pager(
-            config = PagingConfig(pageSize = 5),
-            pagingSourceFactory = { localDataSource.getAllPaginated() }
-        ).flow.map { it.map(GifMapper::map) }.flowOn(coroutineDispatcher)
+    override fun getAllTrending(): Flow<List<Gif>> {
+        return localDataSource.getAll().map { GifMapper.mapList(it) }
     }
 
     override suspend fun update(gif: Gif) {
@@ -43,11 +41,8 @@ class GifRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getFavorites(): Flow<PagingData<Gif>> {
-        return Pager(
-            config = PagingConfig(pageSize = 5),
-            pagingSourceFactory = { localDataSource.getFavoritesPaginated() }
-        ).flow.map { it.map(GifMapper::map) }.flowOn(coroutineDispatcher)
+    override fun getFavorites(): Flow<List<Gif>> {
+        return localDataSource.getFavorites().map { GifMapper.mapList(it) }
     }
 
     override suspend fun refresh() {
@@ -59,7 +54,7 @@ class GifRepositoryImpl @Inject constructor(
                     localDataSource.insertAll(gifEntities.toTypedArray())
                 }
             } catch (t: Throwable) {
-                Log.e("UpdateLocalCache", t.message.toString())
+                Timber.e(t.message.toString())
             }
         }
     }

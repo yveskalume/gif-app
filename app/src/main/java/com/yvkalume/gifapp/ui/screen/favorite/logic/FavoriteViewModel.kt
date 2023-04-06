@@ -1,27 +1,40 @@
 package com.yvkalume.gifapp.ui.screen.favorite.logic
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
+import com.airbnb.mvrx.MavericksViewModel
+import com.airbnb.mvrx.MavericksViewModelFactory
+import com.yvkalume.gifapp.di.mavericks.AssistedViewModelFactory
+import com.yvkalume.gifapp.di.mavericks.hiltMavericksViewModelFactory
 import com.yvkalume.gifapp.domain.entity.Gif
 import com.yvkalume.gifapp.domain.entity.Sticker
 import com.yvkalume.gifapp.domain.repository.GifRepository
 import com.yvkalume.gifapp.domain.repository.StickerRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class FavoriteViewModel @Inject constructor(
+class FavoriteViewModel @AssistedInject constructor(
+    @Assisted initialState: FavoriteUiState,
     private val gifRepository: GifRepository,
     private val stickerRepository: StickerRepository
-) : ViewModel() {
+) : MavericksViewModel<FavoriteUiState>(initialState) {
 
-    val favoritesGifs: Flow<PagingData<Gif>> = gifRepository.getFavorites().cachedIn(viewModelScope)
+    init {
+        getData()
+    }
 
-    val favoritesStickers: Flow<PagingData<Sticker>> = stickerRepository.getFavorites().cachedIn(viewModelScope)
+    private fun getData() {
+        viewModelScope.launch {
+            gifRepository.getFavorites().execute {
+                copy(gifs = it)
+            }
+        }
+        viewModelScope.launch {
+            stickerRepository.getFavorites().execute {
+                copy(stickers = it)
+            }
+        }
+    }
 
     fun removerFavorite(sticker: Sticker) {
         viewModelScope.launch {
@@ -37,4 +50,11 @@ class FavoriteViewModel @Inject constructor(
         }
     }
 
+    @AssistedFactory
+    interface Factory : AssistedViewModelFactory<FavoriteViewModel, FavoriteUiState> {
+        override fun create(state: FavoriteUiState): FavoriteViewModel
+    }
+
+    companion object :
+        MavericksViewModelFactory<FavoriteViewModel, FavoriteUiState> by hiltMavericksViewModelFactory()
 }

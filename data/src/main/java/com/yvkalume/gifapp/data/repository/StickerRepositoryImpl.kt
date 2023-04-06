@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 class StickerRepositoryImpl @Inject constructor(
@@ -29,11 +30,8 @@ class StickerRepositoryImpl @Inject constructor(
     private val coroutineDispatcher: CoroutineDispatcher
 ) : StickerRepository {
 
-    override fun getAllTrending(): Flow<PagingData<Sticker>> {
-        return Pager(
-            config = PagingConfig(pageSize = 5),
-            pagingSourceFactory = { localDataSource.getAllPaginated() }
-        ).flow.map { it.map(StickerMapper::map) }.flowOn(coroutineDispatcher)
+    override fun getAllTrending(): Flow<List<Sticker>> {
+        return localDataSource.getAll().map { StickerMapper.mapList(it) }
     }
 
     override suspend fun update(sticker: Sticker) {
@@ -43,11 +41,8 @@ class StickerRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getFavorites(): Flow<PagingData<Sticker>> {
-        return Pager(
-            config = PagingConfig(pageSize = 5),
-            pagingSourceFactory = { localDataSource.getFavoritesPaginated() }
-        ).flow.map { it.map(StickerMapper::map) }.flowOn(coroutineDispatcher)
+    override fun getFavorites(): Flow<List<Sticker>> {
+        return localDataSource.getFavorites().map { StickerMapper.mapList(it) }
     }
 
     override suspend fun refresh() {
@@ -59,7 +54,7 @@ class StickerRepositoryImpl @Inject constructor(
                     localDataSource.insertAll(stickerEntities.toTypedArray())
                 }
             } catch (t: Throwable) {
-                Log.e("UpdateLocalCache", t.message.toString())
+                Timber.e(t.message.toString())
             }
         }
     }

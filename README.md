@@ -53,8 +53,8 @@ giphyApiKey=Your Api Key
 ```
 
 # Challenge and difficulties encountered
-- In order to make the loading a bit smoother, I had to add pagination on the data coming from the Room database, but this led me to rethink my architecture in order to keep things simple.
-I had to remove the Mavericks viewmodels and I get the paginated data directly as viewmodel properties instead of going through a sealed class for example
+- Actually the goal is to keep things simple, that why i decided to not use (remove) the Jetpack Pagination,because this has somme constraints that will led me to rethinks some parts of my architecture.
+I prefer to implement my own pagination logic in the future.
 
 ## Find this repository useful? :heart:
 Support it by joining __[stargazers](https://github.com/yveskalume/gif-app/stargazers)__ for this repository. :star:

@@ -13,6 +13,7 @@ import androidx.compose.material.TabRow
 import androidx.compose.material.TabRowDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,6 +22,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.airbnb.mvrx.compose.collectAsState
+import com.airbnb.mvrx.compose.mavericksViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.pagerTabIndicatorOffset
@@ -28,19 +31,20 @@ import com.google.accompanist.pager.rememberPagerState
 import com.yvkalume.gifapp.R
 import com.yvkalume.gifapp.ui.components.GifListView
 import com.yvkalume.gifapp.ui.components.StickerListView
+import com.yvkalume.gifapp.ui.screen.favorite.logic.FavoriteUiState
 import com.yvkalume.gifapp.ui.screen.favorite.logic.FavoriteViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun FavoriteScreen(homeViewModel: FavoriteViewModel = hiltViewModel()) {
+fun FavoriteScreen(homeViewModel: FavoriteViewModel = mavericksViewModel()) {
     val context = LocalContext.current
     val pages = context.resources.getStringArray(R.array.gif_categories)
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
 
-    val gifs = homeViewModel.favoritesGifs.collectAsLazyPagingItems()
-    val stickers = homeViewModel.favoritesStickers.collectAsLazyPagingItems()
+    val gifsState by homeViewModel.collectAsState(FavoriteUiState::gifs)
+    val stickersState by homeViewModel.collectAsState(FavoriteUiState::stickers)
 
     Scaffold(
         topBar = {
@@ -96,7 +100,7 @@ fun FavoriteScreen(homeViewModel: FavoriteViewModel = hiltViewModel()) {
                 0 -> {
                     StickerListView(
                         modifier = Modifier.fillMaxSize(),
-                        stickerItems = stickers,
+                        stickersState = stickersState,
                         onFavoriteClick = {
                             homeViewModel.removerFavorite(it)
                         }
@@ -105,7 +109,7 @@ fun FavoriteScreen(homeViewModel: FavoriteViewModel = hiltViewModel()) {
                 1 -> {
                     GifListView(
                         modifier = Modifier.fillMaxSize(),
-                        gifItems = gifs,
+                        gifsState = gifsState,
                         onFavoriteClick = {
                             homeViewModel.removeFavorite(it)
                         }

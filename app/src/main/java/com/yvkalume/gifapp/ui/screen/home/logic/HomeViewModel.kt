@@ -1,32 +1,41 @@
 package com.yvkalume.gifapp.ui.screen.home.logic
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
+import com.airbnb.mvrx.MavericksViewModel
+import com.airbnb.mvrx.MavericksViewModelFactory
+import com.yvkalume.gifapp.di.mavericks.AssistedViewModelFactory
+import com.yvkalume.gifapp.di.mavericks.hiltMavericksViewModelFactory
 import com.yvkalume.gifapp.domain.entity.Gif
 import com.yvkalume.gifapp.domain.entity.Sticker
 import com.yvkalume.gifapp.domain.repository.GifRepository
 import com.yvkalume.gifapp.domain.repository.StickerRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class HomeViewModel @Inject constructor(
+class HomeViewModel @AssistedInject constructor(
+    @Assisted initialState: HomeUiState,
     private val gifRepository: GifRepository,
     private val stickerRepository: StickerRepository
-) : ViewModel() {
+) : MavericksViewModel<HomeUiState>(initialState) {
 
     init {
-        refreshStickers()
-        refreshGifs()
+        refreshData()
+        getData()
     }
 
-    val gifs: Flow<PagingData<Gif>> = gifRepository.getAllTrending().cachedIn(viewModelScope)
-
-    val stickers: Flow<PagingData<Sticker>> = stickerRepository.getAllTrending().cachedIn(viewModelScope)
+    private fun getData() {
+        viewModelScope.launch {
+            stickerRepository.getAllTrending().execute {
+                copy(stickers = it)
+            }
+        }
+        viewModelScope.launch {
+            gifRepository.getAllTrending().execute {
+                copy(gifs = it)
+            }
+        }
+    }
 
     fun toggleFavorite(sticker: Sticker) {
         viewModelScope.launch {
@@ -42,15 +51,21 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun refreshGifs() {
+
+    private fun refreshData() {
         viewModelScope.launch {
             gifRepository.refresh()
         }
-    }
-
-    private fun refreshStickers() {
         viewModelScope.launch {
             stickerRepository.refresh()
         }
     }
+
+    @AssistedFactory
+    interface Factory : AssistedViewModelFactory<HomeViewModel, HomeUiState> {
+        override fun create(state: HomeUiState): HomeViewModel
+    }
+
+    companion object :
+        MavericksViewModelFactory<HomeViewModel, HomeUiState> by hiltMavericksViewModelFactory()
 }
