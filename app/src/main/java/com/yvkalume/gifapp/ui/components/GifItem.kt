@@ -39,7 +39,7 @@ fun GifItem(gif: Gif, modifier: Modifier = Modifier, onFavoriteClick: (Gif) -> U
 				CustomImageView(
 						modifier = modifier,
 						imageUrl = gif.imageUrl,
-						contentScale = ContentScale.Crop,
+						contentScale = ContentScale.FillWidth,
 						onImageLoaded = { imageDrawable = it }
 				)
 				Row(

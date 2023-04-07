@@ -6,6 +6,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,7 +29,6 @@ fun StickerListView(
                 LoadingView()
             }
             is LoadState.Error -> {
-                Log.e("Here",stickerItems().loadState.refresh.toString())
                 EmptyView()
             }
             else -> {
@@ -50,10 +50,12 @@ private fun StickerListViewContent(
     onFavoriteClick: (Sticker) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val listState = rememberLazyListState()
     if (stickers().itemCount == 0) {
         EmptyView()
     } else {
         LazyColumn(
+            state = listState,
             modifier = modifier.fillMaxSize(),
             content = {
                 items(items = stickers(), key = { it.id }) { sticker ->

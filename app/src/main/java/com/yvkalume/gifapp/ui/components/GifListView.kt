@@ -5,7 +5,9 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -48,10 +50,12 @@ private fun GifListViewContent(
     gifs: () -> LazyPagingItems<Gif>,
     onFavoriteClick: (Gif) -> Unit
 ) {
+    val listState = rememberLazyListState()
     if (gifs().itemCount == 0) {
         EmptyView()
     } else {
         LazyColumn(
+            state = listState,
             modifier = modifier.fillMaxSize(),
             content = {
                 items(items = gifs(), key = { it.id }) { gif ->
@@ -59,7 +63,7 @@ private fun GifListViewContent(
                         GifItem(
                             gif = gif,
                             onFavoriteClick = onFavoriteClick,
-                            modifier = Modifier.animateItemPlacement(
+                            modifier = Modifier.wrapContentHeight().animateItemPlacement(
                                 animationSpec = tween(2000)
                             )
                         )
