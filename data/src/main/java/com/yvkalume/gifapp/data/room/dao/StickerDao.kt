@@ -1,5 +1,6 @@
 package com.yvkalume.gifapp.data.room.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -14,8 +15,8 @@ interface StickerDao {
     @Query("SELECT * FROM stickers ORDER BY createdAt DESC")
     fun getAll(): Flow<List<StickerEntity>>
 
-    @Query("SELECT * FROM stickers ORDER BY createdAt DESC LIMIT :limit OFFSET :offset")
-    fun getAllPaginated(limit: Int, offset: Int): List<StickerEntity>
+    @Query("SELECT * FROM stickers ORDER BY createdAt DESC")
+    fun getAllPaginated(): PagingSource<Int, StickerEntity>
 
     @Query("SELECT * FROM stickers WHERE id=:id LIMIT 1")
     fun findById(id: String): StickerEntity
@@ -29,6 +30,6 @@ interface StickerDao {
     @Query("SELECT * FROM stickers WHERE isFavorite = true ORDER BY updatedAt DESC")
     fun getFavorites(): Flow<List<StickerEntity>>
 
-    @Query("SELECT * FROM stickers WHERE isFavorite = true ORDER BY createdAt DESC LIMIT :limit OFFSET :offset")
-    fun getFavoritesPaginated(limit: Int, offset: Int): List<StickerEntity>
+    @Query("SELECT * FROM stickers WHERE isFavorite = true ORDER BY createdAt DESC")
+    fun getFavoritesPaginated(): PagingSource<Int, StickerEntity>
 }

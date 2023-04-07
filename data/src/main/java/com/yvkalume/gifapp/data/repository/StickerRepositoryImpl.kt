@@ -5,6 +5,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import androidx.paging.map
 import com.yvkalume.gifapp.data.datasource.sticker.StickerLocalDataSource
 import com.yvkalume.gifapp.data.datasource.sticker.StickerRemoteDataSource
 import com.yvkalume.gifapp.data.model.mapper.StickerEntityMapper
@@ -30,8 +31,8 @@ class StickerRepositoryImpl @Inject constructor(
     override fun getAllTrending(): Flow<PagingData<Sticker>> {
         return Pager(
             config = PagingConfig(pageSize = 5),
-            pagingSourceFactory = localDataSource::getAllPaginated
-        ).flow.cachedIn(CoroutineScope(Dispatchers.IO))
+            pagingSourceFactory = { localDataSource.getAllPaginated() }
+        ).flow.map { it.map(StickerMapper::map) }.cachedIn(CoroutineScope(Dispatchers.IO))
     }
 
     override suspend fun update(sticker: Sticker) {
@@ -44,8 +45,8 @@ class StickerRepositoryImpl @Inject constructor(
     override fun getFavorites(): Flow<PagingData<Sticker>> {
         return Pager(
             config = PagingConfig(pageSize = 5),
-            pagingSourceFactory = localDataSource::getFavoritesPaginated
-        ).flow
+            pagingSourceFactory = { localDataSource.getFavoritesPaginated() }
+        ).flow.map { it.map(StickerMapper::map) }.cachedIn(CoroutineScope(Dispatchers.IO))
     }
 
     override suspend fun refresh() {

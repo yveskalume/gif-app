@@ -5,6 +5,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import androidx.paging.map
 import com.yvkalume.gifapp.data.datasource.gif.GifLocalDataSource
 import com.yvkalume.gifapp.data.datasource.gif.GifRemoteDataSource
 import com.yvkalume.gifapp.data.model.mapper.GifEntityMapper
@@ -30,8 +31,8 @@ class GifRepositoryImpl @Inject constructor(
     override fun getAllTrending(): Flow<PagingData<Gif>> {
         return Pager(
             config = PagingConfig(pageSize = 5),
-            pagingSourceFactory = localDataSource::getAllPaginated
-        ).flow.cachedIn(CoroutineScope(Dispatchers.IO))
+            pagingSourceFactory = { localDataSource.getAllPaginated() }
+        ).flow.map { it.map(GifMapper::map) }.cachedIn(CoroutineScope(Dispatchers.IO))
     }
 
     override suspend fun update(gif: Gif) {
@@ -44,8 +45,8 @@ class GifRepositoryImpl @Inject constructor(
     override fun getFavorites(): Flow<PagingData<Gif>> {
         return Pager(
             config = PagingConfig(pageSize = 5),
-            pagingSourceFactory = localDataSource::getFavoritesPaginated
-        ).flow.cachedIn(CoroutineScope(Dispatchers.IO))
+            pagingSourceFactory = { localDataSource.getFavoritesPaginated() }
+        ).flow.map { it.map(GifMapper::map) }.cachedIn(CoroutineScope(Dispatchers.IO))
     }
 
     override suspend fun refresh() {

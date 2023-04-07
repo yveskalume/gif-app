@@ -8,6 +8,7 @@ import com.yvkalume.gifapp.domain.entity.Sticker
 import com.yvkalume.gifapp.domain.repository.GifRepository
 import com.yvkalume.gifapp.domain.repository.StickerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,10 +31,6 @@ class HomeViewModel @Inject constructor(
 
     val stickers: Flow<PagingData<Sticker>>
         get() = stickerRepository.getAllTrending()
-
-    private val _isRefreshing = MutableStateFlow(false)
-    val isRefreshing: StateFlow<Boolean>
-        get() = _isRefreshing
 
     fun toggleFavorite(sticker: Sticker) {
         viewModelScope.launch {
