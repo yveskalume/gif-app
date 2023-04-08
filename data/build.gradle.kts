@@ -77,6 +77,8 @@ dependencies {
     releaseImplementation(libs.chucker.release)
 
 	implementation(libs.kotlinx.serialization.json)
+
+	api(libs.timber)
 }
 
 secrets {

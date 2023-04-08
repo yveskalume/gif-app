@@ -90,7 +90,7 @@ fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
             when (pagerState.currentPage) {
                 0 -> {
                     StickerListView(
-                        stickerItems = { stickers },
+                        stickerItems = stickers,
                         onFavoriteClick = {
                             homeViewModel.toggleFavorite(it)
                         }
@@ -98,7 +98,7 @@ fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
                 }
                 1 -> {
                     GifListView(
-                        gifItems = { gifs },
+                        gifItems = gifs,
                         onFavoriteClick = {
                             homeViewModel.toggleFavorite(it)
                         }

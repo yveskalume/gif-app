@@ -96,7 +96,7 @@ fun FavoriteScreen(homeViewModel: FavoriteViewModel = hiltViewModel()) {
                 0 -> {
                     StickerListView(
                         modifier = Modifier.fillMaxSize(),
-                        stickerItems = { stickers },
+                        stickerItems = stickers,
                         onFavoriteClick = {
                             homeViewModel.removerFavorite(it)
                         }
@@ -105,7 +105,7 @@ fun FavoriteScreen(homeViewModel: FavoriteViewModel = hiltViewModel()) {
                 1 -> {
                     GifListView(
                         modifier = Modifier.fillMaxSize(),
-                        gifItems = { gifs },
+                        gifItems = gifs,
                         onFavoriteClick = {
                             homeViewModel.removeFavorite(it)
                         }

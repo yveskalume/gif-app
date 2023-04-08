@@ -3,15 +3,13 @@ package com.yvkalume.gifapp.ui.screen.home.logic
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.yvkalume.gifapp.domain.entity.Gif
 import com.yvkalume.gifapp.domain.entity.Sticker
 import com.yvkalume.gifapp.domain.repository.GifRepository
 import com.yvkalume.gifapp.domain.repository.StickerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,11 +24,9 @@ class HomeViewModel @Inject constructor(
         refreshGifs()
     }
 
-    val gifs: Flow<PagingData<Gif>>
-        get() = gifRepository.getAllTrending()
+    val gifs: Flow<PagingData<Gif>> = gifRepository.getAllTrending().cachedIn(viewModelScope)
 
-    val stickers: Flow<PagingData<Sticker>>
-        get() = stickerRepository.getAllTrending()
+    val stickers: Flow<PagingData<Sticker>> = stickerRepository.getAllTrending().cachedIn(viewModelScope)
 
     fun toggleFavorite(sticker: Sticker) {
         viewModelScope.launch {

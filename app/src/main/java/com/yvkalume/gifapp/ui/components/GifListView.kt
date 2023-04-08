@@ -20,12 +20,12 @@ import com.yvkalume.gifapp.domain.entity.Gif
 @Composable
 fun GifListView(
     modifier: Modifier = Modifier,
-    gifItems: () -> LazyPagingItems<Gif>,
+    gifItems: LazyPagingItems<Gif>,
     onFavoriteClick: (Gif) -> Unit
 ) {
 
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
-        when (gifItems().loadState.refresh) {
+        when (gifItems.loadState.refresh) {
             LoadState.Loading -> {
                 LoadingView()
             }
@@ -47,18 +47,18 @@ fun GifListView(
 @Composable
 private fun GifListViewContent(
     modifier: Modifier = Modifier,
-    gifs: () -> LazyPagingItems<Gif>,
+    gifs: LazyPagingItems<Gif>,
     onFavoriteClick: (Gif) -> Unit
 ) {
     val listState = rememberLazyListState()
-    if (gifs().itemCount == 0) {
+    if (gifs.itemCount == 0) {
         EmptyView()
     } else {
         LazyColumn(
             state = listState,
             modifier = modifier.fillMaxSize(),
             content = {
-                items(items = gifs(), key = { it.id }) { gif ->
+                items(items = gifs, key = { it.id }) { gif ->
                     if (gif != null) {
                         GifItem(
                             gif = gif,
@@ -69,7 +69,7 @@ private fun GifListViewContent(
                         )
                     }
                 }
-                if (gifs().loadState.append is LoadState.Loading) {
+                if (gifs.loadState.append is LoadState.Loading) {
                     item {
                         CircularProgressIndicator()
                     }

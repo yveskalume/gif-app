@@ -9,26 +9,42 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import com.yvkalume.gifapp.domain.entity.Sticker
+import timber.log.Timber
 
 @Composable
 fun StickerListView(
     modifier: Modifier = Modifier,
-    stickerItems: () -> LazyPagingItems<Sticker>,
+    stickerItems: LazyPagingItems<Sticker>,
     onFavoriteClick: (Sticker) -> Unit
 ) {
+    var isFirstLoad by remember {
+        mutableStateOf(false)
+    }
+
+    val items by remember {
+        derivedStateOf {
+            stickerItems.loadState.source.refresh
+        }
+    }
 
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
-        when (stickerItems().loadState.refresh) {
-            LoadState.Loading -> {
+        when {
+            (items is LoadState.Loading && isFirstLoad) -> {
+                isFirstLoad = false
                 LoadingView()
             }
-            is LoadState.Error -> {
+            items is LoadState.Error -> {
                 EmptyView()
             }
             else -> {
@@ -46,19 +62,19 @@ fun StickerListView(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun StickerListViewContent(
-    stickers: () -> LazyPagingItems<Sticker>,
+    stickers: LazyPagingItems<Sticker>,
     onFavoriteClick: (Sticker) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val listState = rememberLazyListState()
-    if (stickers().itemCount == 0) {
+    if (stickers.itemCount == 0) {
         EmptyView()
     } else {
         LazyColumn(
             state = listState,
             modifier = modifier.fillMaxSize(),
             content = {
-                items(items = stickers(), key = { it.id }) { sticker ->
+                items(items = stickers, key = { it.id }) { sticker ->
                     if (sticker != null) {
                         StickerItem(
                             sticker = sticker,
@@ -69,7 +85,7 @@ private fun StickerListViewContent(
                         )
                     }
                 }
-                if (stickers().loadState.append is LoadState.Loading) {
+                if (stickers.loadState.append is LoadState.Loading) {
                     item {
                         CircularProgressIndicator()
                     }

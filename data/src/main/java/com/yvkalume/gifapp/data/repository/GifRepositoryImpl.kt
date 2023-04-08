@@ -17,6 +17,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,7 +33,7 @@ class GifRepositoryImpl @Inject constructor(
         return Pager(
             config = PagingConfig(pageSize = 5),
             pagingSourceFactory = { localDataSource.getAllPaginated() }
-        ).flow.map { it.map(GifMapper::map) }.cachedIn(CoroutineScope(Dispatchers.IO))
+        ).flow.map { it.map(GifMapper::map) }.flowOn(coroutineDispatcher)
     }
 
     override suspend fun update(gif: Gif) {
@@ -46,7 +47,7 @@ class GifRepositoryImpl @Inject constructor(
         return Pager(
             config = PagingConfig(pageSize = 5),
             pagingSourceFactory = { localDataSource.getFavoritesPaginated() }
-        ).flow.map { it.map(GifMapper::map) }.cachedIn(CoroutineScope(Dispatchers.IO))
+        ).flow.map { it.map(GifMapper::map) }.flowOn(coroutineDispatcher)
     }
 
     override suspend fun refresh() {

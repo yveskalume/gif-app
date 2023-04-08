@@ -19,12 +19,9 @@ class FavoriteViewModel @Inject constructor(
     private val stickerRepository: StickerRepository
 ) : ViewModel() {
 
-    val favoritesGifs: Flow<PagingData<Gif>>
-        get() = gifRepository.getFavorites()
+    val favoritesGifs: Flow<PagingData<Gif>> = gifRepository.getFavorites().cachedIn(viewModelScope)
 
-    val favoritesStickers: Flow<PagingData<Sticker>>
-        get() = stickerRepository.getFavorites()
-
+    val favoritesStickers: Flow<PagingData<Sticker>> = stickerRepository.getFavorites().cachedIn(viewModelScope)
 
     fun removerFavorite(sticker: Sticker) {
         viewModelScope.launch {
