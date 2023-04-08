@@ -29,10 +29,10 @@ fun StickerListView(
     onFavoriteClick: (Sticker) -> Unit
 ) {
     var isFirstLoad by remember {
-        mutableStateOf(false)
+        mutableStateOf(true)
     }
 
-    val items by remember {
+    val itemsLoadState by remember {
         derivedStateOf {
             stickerItems.loadState.source.refresh
         }
@@ -40,11 +40,11 @@ fun StickerListView(
 
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
         when {
-            (items is LoadState.Loading && isFirstLoad) -> {
+            (itemsLoadState is LoadState.Loading && isFirstLoad) -> {
                 isFirstLoad = false
                 LoadingView()
             }
-            items is LoadState.Error -> {
+            itemsLoadState is LoadState.Error -> {
                 EmptyView()
             }
             else -> {

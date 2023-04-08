@@ -10,6 +10,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
@@ -24,12 +29,23 @@ fun GifListView(
     onFavoriteClick: (Gif) -> Unit
 ) {
 
+    var isFirstLoad by remember {
+        mutableStateOf(true)
+    }
+
+    val itemsLoadState by remember {
+        derivedStateOf {
+            gifItems.loadState.source.refresh
+        }
+    }
+
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
-        when (gifItems.loadState.refresh) {
-            LoadState.Loading -> {
+        when {
+            (itemsLoadState is LoadState.Loading && isFirstLoad) -> {
+                isFirstLoad = false
                 LoadingView()
             }
-            is LoadState.Error -> {
+            itemsLoadState is LoadState.Error -> {
                 EmptyView()
             }
             else -> {
