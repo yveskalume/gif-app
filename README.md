@@ -31,6 +31,7 @@ Go to the [Releases](https://github.com/yveskalume/gif-app/releases) to download
     - [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle) - dispose observing data when lifecycle state changes.
     - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - UI related data holder, lifecycle aware.
     - [Room](https://developer.android.com/training/data-storage/room) - to construct database and persist data more easily.
+    - [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview) - helps to load and display pages of data from a larger dataset in order to use both network bandwidth and system resources more efficiently
 - [Material Design](https://developer.android.com/jetpack/compose/designsystems) - Material Design comes with a rich set of Material components
 - [Mavericks](https://airbnb.io/mavericks) - Mavericks is the Android MVI framework from Airbnb.
 - [Lottie Android](https://github.com/airbnb/lottie-android) - Render After Effects animations natively on Android
