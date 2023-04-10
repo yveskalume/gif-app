@@ -20,13 +20,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
 class StickerRepositoryImpl @Inject constructor(
     private val remoteDataSource: StickerRemoteDataSource,
     private val localDataSource: StickerLocalDataSource,
-    private val coroutineScope: CoroutineScope,
     private val coroutineDispatcher: CoroutineDispatcher
 ) : StickerRepository {
 
@@ -36,7 +36,7 @@ class StickerRepositoryImpl @Inject constructor(
 
     override suspend fun update(sticker: Sticker) {
         val updatedSticker = sticker.copy(updatedAt = System.currentTimeMillis())
-        coroutineScope.launch(coroutineDispatcher) {
+        withContext(coroutineDispatcher) {
             localDataSource.update(updatedSticker.toEntity())
         }
     }
@@ -46,7 +46,7 @@ class StickerRepositoryImpl @Inject constructor(
     }
 
     override suspend fun refresh() {
-        coroutineScope.launch(coroutineDispatcher) {
+        withContext(coroutineDispatcher) {
             try {
                 val response = remoteDataSource.getAllTrending()
                 if (response.meta.status == 200) {

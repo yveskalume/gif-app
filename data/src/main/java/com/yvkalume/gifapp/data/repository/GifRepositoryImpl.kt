@@ -20,13 +20,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
 class GifRepositoryImpl @Inject constructor(
     private val remoteDataSource: GifRemoteDataSource,
     private val localDataSource: GifLocalDataSource,
-    private val coroutineScope: CoroutineScope,
     private val coroutineDispatcher: CoroutineDispatcher
 ) : GifRepository {
 
@@ -36,7 +36,7 @@ class GifRepositoryImpl @Inject constructor(
 
     override suspend fun update(gif: Gif) {
         val updatedGif = gif.copy(updatedAt = System.currentTimeMillis())
-        coroutineScope.launch(coroutineDispatcher) {
+        withContext(coroutineDispatcher) {
             localDataSource.update(updatedGif.toEntity())
         }
     }
@@ -46,7 +46,7 @@ class GifRepositoryImpl @Inject constructor(
     }
 
     override suspend fun refresh() {
-        coroutineScope.launch(coroutineDispatcher) {
+        withContext(coroutineDispatcher) {
             try {
                 val response = remoteDataSource.getAllTrending()
                 if (response.meta.status == 200) {

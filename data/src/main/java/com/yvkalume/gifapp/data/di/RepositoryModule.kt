@@ -13,40 +13,36 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
 
-		@Provides
-		@Singleton
-		fun provideStickerRepository(
-				remoteDataSource: StickerRemoteDataSource,
-				localDataSource: StickerLocalDataSource,
-				coroutineScope: CoroutineScope,
-				@IoDispatcher coroutineDispatcher: CoroutineDispatcher
-		): StickerRepository {
-				return StickerRepositoryImpl(
-						remoteDataSource,
-						localDataSource,
-						coroutineScope,
-						coroutineDispatcher
-				)
-		}
+    @Provides
+    @Singleton
+    fun provideStickerRepository(
+        remoteDataSource: StickerRemoteDataSource,
+        localDataSource: StickerLocalDataSource,
+        @IoDispatcher coroutineDispatcher: CoroutineDispatcher
+    ): StickerRepository {
+        return StickerRepositoryImpl(
+            remoteDataSource,
+            localDataSource,
+            coroutineDispatcher
+        )
+    }
 
-		@Provides
-		@Singleton
-		fun provideGifRepository(
-				remoteDataSource: GifRemoteDataSource,
-				localDataSource: GifLocalDataSource,
-				coroutineScope: CoroutineScope,
-				@IoDispatcher coroutineDispatcher: CoroutineDispatcher
-		): GifRepository {
-				return GifRepositoryImpl(
-						remoteDataSource, localDataSource, coroutineScope, coroutineDispatcher
-				)
-		}
+    @Provides
+    @Singleton
+    fun provideGifRepository(
+        remoteDataSource: GifRemoteDataSource,
+        localDataSource: GifLocalDataSource,
+        @IoDispatcher coroutineDispatcher: CoroutineDispatcher
+    ): GifRepository {
+        return GifRepositoryImpl(
+            remoteDataSource, localDataSource, coroutineDispatcher
+        )
+    }
 }
