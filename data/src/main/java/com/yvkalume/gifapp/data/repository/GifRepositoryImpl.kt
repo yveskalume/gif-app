@@ -1,11 +1,5 @@
 package com.yvkalume.gifapp.data.repository
 
-import android.util.Log
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
-import androidx.paging.map
 import com.yvkalume.gifapp.data.datasource.gif.GifLocalDataSource
 import com.yvkalume.gifapp.data.datasource.gif.GifRemoteDataSource
 import com.yvkalume.gifapp.data.model.mapper.GifEntityMapper
@@ -14,12 +8,8 @@ import com.yvkalume.gifapp.data.model.room.toEntity
 import com.yvkalume.gifapp.domain.entity.Gif
 import com.yvkalume.gifapp.domain.repository.GifRepository
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
