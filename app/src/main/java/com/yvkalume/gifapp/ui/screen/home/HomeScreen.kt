@@ -56,7 +56,7 @@ fun HomeScreen(homeViewModel: HomeViewModel = mavericksViewModel()) {
             ) {
                 Text(
                     text = stringResource(id = R.string.app_name),
-                    style = MaterialTheme.typography.h1,
+                    style = MaterialTheme.typography.h2,
                     modifier = Modifier.padding(top = 16.dp)
                 )
 

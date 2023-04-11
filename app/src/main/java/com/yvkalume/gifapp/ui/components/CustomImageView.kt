@@ -30,24 +30,23 @@ fun CustomImageView(
     modifier: Modifier = Modifier,
     imageUrl: String,
     contentScale: ContentScale = ContentScale.Crop,
-    onImageLoaded: (Bitmap?) -> Unit = {}
 ) {
     val context = LocalContext.current
     val dispatcher = Dispatchers.IO.limitedParallelism(5)
 
     SubcomposeAsyncImage(
         modifier = Modifier
-			.fillMaxWidth()
-			.defaultMinSize(minHeight = 300.dp)
-			.padding(16.dp)
-			.clip(RoundedCornerShape(24.dp))
-			.then(modifier),
+            .fillMaxWidth()
+            .defaultMinSize(minHeight = 300.dp)
+            .padding(16.dp)
+            .clip(RoundedCornerShape(24.dp))
+            .then(modifier),
         model = imageUrl,
         loading = {
             Box(
                 modifier = Modifier
-					.fillMaxSize()
-					.shimmer()
+                    .fillMaxSize()
+                    .shimmer()
             )
         },
         imageLoader = ImageLoader.Builder(context)
@@ -64,9 +63,5 @@ fun CustomImageView(
         contentDescription = null,
         contentScale = contentScale,
         alignment = Alignment.Center,
-        onSuccess = {
-            val bitmap = it.result.drawable.toBitmap()
-            onImageLoaded(bitmap)
-        }
     )
 }
