@@ -1,7 +1,13 @@
 package com.yvkalume.gifapp.data.model.server
+
+import kotlinx.serialization.SerialName
+
 @kotlinx.serialization.Serializable
 data class MetaObject(
-		val msg: String = "",
-		val status: Int,
-		val response_id: String = ""
+    @SerialName("msg")
+    val msg: String = "",
+    @SerialName("status")
+    val status: Int,
+    @SerialName("response_id")
+    val response_id: String = ""
 )

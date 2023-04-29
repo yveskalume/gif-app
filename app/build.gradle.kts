@@ -9,6 +9,15 @@ android {
     namespace = "com.yvkalume.gifapp"
     compileSdk = 33
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("/Users/yves-kalume/Documents/developerkey.jks")
+            storePassword = "yveskalume"
+            keyAlias = "key0"
+            keyPassword = "yveskalume"
+        }
+    }
+
     defaultConfig {
         applicationId = "com.yvkalume.gifapp"
         minSdk = 24
@@ -26,9 +35,11 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            isDebuggable = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
