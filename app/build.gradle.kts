@@ -12,9 +12,9 @@ android {
     signingConfigs {
         create("release") {
             storeFile = file("/Users/yves-kalume/Documents/developerkey.jks")
-            storePassword = "yveskalume"
-            keyAlias = "key0"
-            keyPassword = "yveskalume"
+            storePassword = " "
+            keyAlias = " "
+            keyPassword = " "
         }
     }
 
@@ -22,8 +22,8 @@ android {
         applicationId = "com.yvkalume.gifapp"
         minSdk = 24
         targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
