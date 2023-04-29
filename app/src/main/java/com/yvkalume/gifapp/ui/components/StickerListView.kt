@@ -32,11 +32,16 @@ fun StickerListView(
                 LoadingView()
             }
             is Success -> {
-                StickerListViewContent(
-                    modifier = modifier,
-                    stickers = stickersState.invoke(),
-                    onFavoriteClick = onFavoriteClick
-                )
+                val stickers = stickersState.invoke()
+                if (stickers.isNotEmpty()) {
+                    StickerListViewContent(
+                        modifier = modifier,
+                        stickers = stickers,
+                        onFavoriteClick = onFavoriteClick
+                    )
+                } else {
+                    EmptyView()
+                }
             }
             Uninitialized -> {}
         }

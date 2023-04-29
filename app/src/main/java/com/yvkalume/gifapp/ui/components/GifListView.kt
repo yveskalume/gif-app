@@ -30,16 +30,24 @@ fun GifListView(
             is Fail -> {
                 EmptyView()
             }
+
             is Loading -> {
                 LoadingView()
             }
+
             is Success -> {
-                GifListViewContent(
-                    modifier = modifier,
-                    gifs = gifsState.invoke(),
-                    onFavoriteClick = onFavoriteClick
-                )
+                val gifs = gifsState.invoke()
+                if (gifs.isNotEmpty()) {
+                    GifListViewContent(
+                        modifier = modifier,
+                        gifs = gifs,
+                        onFavoriteClick = onFavoriteClick
+                    )
+                } else {
+                    EmptyView()
+                }
             }
+
             Uninitialized -> {}
         }
     }
