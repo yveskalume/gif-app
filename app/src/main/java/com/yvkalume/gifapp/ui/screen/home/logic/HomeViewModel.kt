@@ -20,17 +20,18 @@ class HomeViewModel @AssistedInject constructor(
 ) : MavericksViewModel<HomeUiState>(initialState) {
 
     init {
-        refreshData()
         getData()
     }
 
     private fun getData() {
         viewModelScope.launch {
+            stickerRepository.refresh()
             stickerRepository.getAllTrending().execute {
                 copy(stickers = it)
             }
         }
         viewModelScope.launch {
+            gifRepository.refresh()
             gifRepository.getAllTrending().execute {
                 copy(gifs = it)
             }
@@ -48,16 +49,6 @@ class HomeViewModel @AssistedInject constructor(
         viewModelScope.launch {
             val updatedGif = gif.copy(isFavorite = !gif.isFavorite)
             gifRepository.update(updatedGif)
-        }
-    }
-
-
-    private fun refreshData() {
-        viewModelScope.launch {
-            gifRepository.refresh()
-        }
-        viewModelScope.launch {
-            stickerRepository.refresh()
         }
     }
 
