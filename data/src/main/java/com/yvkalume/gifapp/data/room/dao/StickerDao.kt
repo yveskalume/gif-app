@@ -27,9 +27,9 @@ interface StickerDao {
     @Update
     fun update(sticker: StickerEntity)
 
-    @Query("SELECT * FROM stickers WHERE isFavorite = true ORDER BY updatedAt DESC")
+    @Query("SELECT * FROM stickers WHERE isFavorite = 1 ORDER BY updatedAt DESC")
     fun getFavorites(): Flow<List<StickerEntity>>
 
-    @Query("SELECT * FROM stickers WHERE isFavorite = true ORDER BY createdAt DESC")
+    @Query("SELECT * FROM stickers WHERE isFavorite = 1 ORDER BY createdAt DESC")
     fun getFavoritesPaginated(): PagingSource<Int, StickerEntity>
 }

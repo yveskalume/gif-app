@@ -27,10 +27,10 @@ interface GifDao {
     @Update
     fun update(gif: GifEntity)
 
-    @Query("SELECT * FROM gifs WHERE isFavorite = true ORDER BY updatedAt DESC")
+    @Query("SELECT * FROM gifs WHERE isFavorite = 1 ORDER BY updatedAt DESC")
     fun getFavorites(): Flow<List<GifEntity>>
 
-    @Query("SELECT * FROM gifs WHERE isFavorite = true ORDER BY createdAt DESC")
+    @Query("SELECT * FROM gifs WHERE isFavorite = 1 ORDER BY createdAt DESC")
     fun getFavoritesPaginated(): PagingSource<Int, GifEntity>
 
 }
