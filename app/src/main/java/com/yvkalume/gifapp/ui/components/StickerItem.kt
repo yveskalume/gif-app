@@ -1,5 +1,6 @@
 package com.yvkalume.gifapp.ui.components
 
+import android.Manifest
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,15 +20,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import com.yvkalume.gifapp.domain.entity.Sticker
 import com.yvkalume.gifapp.ui.util.downloadFile
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun StickerItem(
     sticker: Sticker,
     modifier: Modifier = Modifier,
     onFavoriteClick: (Sticker) -> Unit
 ) {
+    val permissionState = rememberPermissionState(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
     val context = LocalContext.current
 
@@ -52,8 +58,13 @@ fun StickerItem(
 
             IconButton(
                 onClick = {
-                    Toast.makeText(context,"Download started", Toast.LENGTH_LONG).show()
-                    context.downloadFile(sticker.imageUrl, sticker.title)
+                    Toast.makeText(context, "Download started", Toast.LENGTH_LONG).show()
+                    permissionState.launchPermissionRequest()
+                    if (permissionState.status.isGranted) {
+                        context.downloadFile(sticker.imageUrl, "${sticker.title}.gif")
+                    } else {
+                        Toast.makeText(context, "Not Download permission", Toast.LENGTH_LONG).show()
+                    }
                 }
             ) {
                 Icon(imageVector = Icons.Rounded.Download, contentDescription = null)

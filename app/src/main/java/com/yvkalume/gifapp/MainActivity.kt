@@ -8,12 +8,25 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
 import com.yvkalume.gifapp.ui.screen.root.RootScreen
 import com.yvkalume.gifapp.ui.theme.GifAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+//    private fun checkPermission() {
+//        lifecycleScope.launch {
+//            when (requestPermissionsAsync(*permissions.toTypedArray())) {
+//                is PermissionResult.Granted -> {}
+//                is PermissionResult.Denied.JustDenied -> {}
+//                is PermissionResult.Denied.NeedsRationale -> {}
+//                is PermissionResult.Denied.DeniedPermanently -> {}
+//                PermissionResult.Cancelled -> {}
+//            }
+//        }
+//    }
     override fun onCreate(savedInstanceState: Bundle?) {
 		installSplashScreen()
         super.onCreate(savedInstanceState)

@@ -95,6 +95,8 @@ paging-compose = "androidx.paging:paging-compose:1.0.0-alpha18"
 
 timber = "com.jakewharton.timber:timber:5.0.1"
 
+accompanist-permision = "com.google.accompanist:accompanist-permissions:0.31.1-alpha"
+
 [bundles]
 core = ["core-ktx", "lifecycle-ktx"]
 compose = ["compose-ui-ui", "compose-ui-preview", "compose-ui-androidtest", "compose-icons", "compose-activity", "compose-material", "compose-navigation", "splashscreen","compose-lifecycle-runtime"]

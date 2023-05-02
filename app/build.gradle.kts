@@ -96,6 +96,8 @@ dependencies {
     implementation(libs.mavericks.compose)
 
     implementation(libs.paging.compose)
+
+    implementation(libs.accompanist.permision)
 }
 
 kapt {
