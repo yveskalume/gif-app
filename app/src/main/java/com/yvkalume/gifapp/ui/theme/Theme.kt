@@ -8,39 +8,39 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
-		primary = Green200,
-		primaryVariant = LightGreen,
-		secondary = Blue200,
+    primary = Green200,
+    primaryVariant = LightGreen,
+    secondary = Blue200,
 )
 
 private val LightColorPalette = lightColors(
-		primary = Green200,
-		primaryVariant = LightGreen,
-		secondary = Blue200,
-		background = Color(0xFFFDFDFD)
+    primary = Green200,
+    primaryVariant = LightGreen,
+    secondary = Blue200,
+    background = Color(0xFFFDFDFD)
 
-		/* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+    /* Other default colors to override
+background = Color.White,
+surface = Color.White,
+onPrimary = Color.White,
+onSecondary = Color.Black,
+onBackground = Color.Black,
+onSurface = Color.Black,
+*/
 )
 
 @Composable
 fun GifAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-		val colors = if (darkTheme) {
-				DarkColorPalette
-		} else {
-				LightColorPalette
-		}
+    val colors = if (darkTheme) {
+        DarkColorPalette
+    } else {
+        LightColorPalette
+    }
 
-		MaterialTheme(
-				colors = colors,
-				typography = Typography,
-				shapes = Shapes,
-				content = content
-		)
+    MaterialTheme(
+        colors = colors,
+        typography = Typography,
+        shapes = Shapes,
+        content = content
+    )
 }
