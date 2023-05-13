@@ -1,4 +1,4 @@
-package com.yvkalume.gifapp.data.datasource.gif
+package com.yvkalume.gifapp.data.datasource
 
 import androidx.paging.PagingSource
 import com.yvkalume.gifapp.data.model.room.GifEntity

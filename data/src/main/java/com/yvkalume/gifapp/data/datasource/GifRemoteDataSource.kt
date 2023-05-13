@@ -1,4 +1,4 @@
-package com.yvkalume.gifapp.data.datasource.gif
+package com.yvkalume.gifapp.data.datasource
 
 import com.yvkalume.gifapp.data.model.server.GiphyHttpResponse
 import com.yvkalume.gifapp.data.util.ServerEndpoints

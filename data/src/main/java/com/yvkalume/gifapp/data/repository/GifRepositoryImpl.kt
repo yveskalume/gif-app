@@ -1,7 +1,7 @@
 package com.yvkalume.gifapp.data.repository
 
-import com.yvkalume.gifapp.data.datasource.gif.GifLocalDataSource
-import com.yvkalume.gifapp.data.datasource.gif.GifRemoteDataSource
+import com.yvkalume.gifapp.data.datasource.GifLocalDataSource
+import com.yvkalume.gifapp.data.datasource.GifRemoteDataSource
 import com.yvkalume.gifapp.data.model.mapper.GifEntityMapper
 import com.yvkalume.gifapp.data.model.mapper.GifMapper
 import com.yvkalume.gifapp.data.model.room.toEntity

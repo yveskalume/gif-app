@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import com.yvkalume.gifapp.data.room.AppDatabase
 import com.yvkalume.gifapp.data.room.dao.GifDao
-import com.yvkalume.gifapp.data.room.dao.StickerDao
 import com.yvkalume.gifapp.data.room.migrations.MIGRATION_1_2
 import dagger.Module
 import dagger.Provides
@@ -17,22 +16,17 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RoomModule {
 
-		@Singleton
-		@Provides
-		fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
-				return Room.databaseBuilder(
-						context,
-						AppDatabase::class.java, "database-name"
-				).addMigrations(MIGRATION_1_2).build()
-		}
+    @Singleton
+    @Provides
+    fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
+        return Room.databaseBuilder(
+            context,
+            AppDatabase::class.java, "database-name"
+        ).addMigrations(MIGRATION_1_2).build()
+    }
 
-		@Provides
-		fun provideGifDao(db: AppDatabase): GifDao {
-				return db.gifDao()
-		}
-
-		@Provides
-		fun provideStickerDao(db: AppDatabase): StickerDao {
-				return db.stickerDao()
-		}
+    @Provides
+    fun provideGifDao(db: AppDatabase): GifDao {
+        return db.gifDao()
+    }
 }

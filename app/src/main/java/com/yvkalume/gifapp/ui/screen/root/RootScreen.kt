@@ -18,75 +18,75 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.yvkalume.gifapp.ui.screen.favorite.FavoriteScreen
-import com.yvkalume.gifapp.ui.screen.home.HomeScreen
+import com.yvkalume.gifapp.ui.screen.favorite.FavoriteRoute
+import com.yvkalume.gifapp.ui.screen.home.HomeRoute
 import com.yvkalume.gifapp.ui.util.Destination
 import com.yvkalume.gifapp.ui.util.isCurrent
 
 @Composable
 fun RootScreen(modifier: Modifier = Modifier) {
-		val navController = rememberNavController()
-		Scaffold(
-				modifier = modifier,
-				bottomBar = {
-						BottomNavigation(
-								backgroundColor = Color.White
-						) {
-								val navBackStackEntry by navController.currentBackStackEntryAsState()
-								val currentDestination = navBackStackEntry?.destination
+    val navController = rememberNavController()
+    Scaffold(
+        modifier = modifier,
+        bottomBar = {
+            BottomNavigation(
+                backgroundColor = Color.White
+            ) {
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentDestination = navBackStackEntry?.destination
 
-								Destination.values().forEach { destination ->
-										BottomNavigationItem(
-												selected = currentDestination.isCurrent(destination.route),
-												onClick = {
-														navController.navigate(destination.route) {
-																popUpTo(navController.graph.findStartDestination().id) {
-																		saveState = true
-																}
-																launchSingleTop = true
-																restoreState = true
-														}
-												},
-												icon = {
-														Icon(
-																imageVector = destination.icon,
-																contentDescription = stringResource(id = destination.label),
-																tint = if (currentDestination.isCurrent(destination.route)) {
-																		MaterialTheme.colors.primary
-																} else {
-																		Color.Black
-																}
-														)
-												},
-												label = {
-														Text(
-																text = stringResource(id = destination.label),
-																color = if (currentDestination.isCurrent(destination.route)) {
-																		MaterialTheme.colors.primary
-																} else {
-																		Color.Black
-																}
-														)
-												}
-										)
-								}
-						}
-				}
-		) { contentPadding ->
-				NavHost(
-						navController = navController,
-						startDestination = Destination.Home.route,
-						modifier = Modifier
-								.fillMaxSize()
-								.padding(contentPadding)
-				) {
-						composable(Destination.Home.route) {
-								HomeScreen()
-						}
+                Destination.values().forEach { destination ->
+                    BottomNavigationItem(
+                        selected = currentDestination.isCurrent(destination.route),
+                        onClick = {
+                            navController.navigate(destination.route) {
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        },
+                        icon = {
+                            Icon(
+                                imageVector = destination.icon,
+                                contentDescription = stringResource(id = destination.label),
+                                tint = if (currentDestination.isCurrent(destination.route)) {
+                                    MaterialTheme.colors.primary
+                                } else {
+                                    Color.Black
+                                }
+                            )
+                        },
+                        label = {
+                            Text(
+                                text = stringResource(id = destination.label),
+                                color = if (currentDestination.isCurrent(destination.route)) {
+                                    MaterialTheme.colors.primary
+                                } else {
+                                    Color.Black
+                                }
+                            )
+                        }
+                    )
+                }
+            }
+        }
+    ) { contentPadding ->
+        NavHost(
+            navController = navController,
+            startDestination = Destination.Home.route,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
+        ) {
+            composable(Destination.Home.route) {
+                HomeRoute()
+            }
 
-						composable(Destination.Favorites.route) {
-								FavoriteScreen()
-						}
-				}
-		}
+            composable(Destination.Favorites.route) {
+                FavoriteRoute()
+            }
+        }
+    }
 }

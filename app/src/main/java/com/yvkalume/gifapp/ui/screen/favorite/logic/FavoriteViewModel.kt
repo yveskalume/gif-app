@@ -5,9 +5,7 @@ import com.airbnb.mvrx.MavericksViewModelFactory
 import com.yvkalume.gifapp.di.mavericks.AssistedViewModelFactory
 import com.yvkalume.gifapp.di.mavericks.hiltMavericksViewModelFactory
 import com.yvkalume.gifapp.domain.entity.Gif
-import com.yvkalume.gifapp.domain.entity.Sticker
 import com.yvkalume.gifapp.domain.repository.GifRepository
-import com.yvkalume.gifapp.domain.repository.StickerRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -16,7 +14,6 @@ import kotlinx.coroutines.launch
 class FavoriteViewModel @AssistedInject constructor(
     @Assisted initialState: FavoriteUiState,
     private val gifRepository: GifRepository,
-    private val stickerRepository: StickerRepository
 ) : MavericksViewModel<FavoriteUiState>(initialState) {
 
     init {
@@ -28,18 +25,6 @@ class FavoriteViewModel @AssistedInject constructor(
             gifRepository.getFavorites().execute {
                 copy(gifs = it)
             }
-        }
-        viewModelScope.launch {
-            stickerRepository.getFavorites().execute {
-                copy(stickers = it)
-            }
-        }
-    }
-
-    fun removerFavorite(sticker: Sticker) {
-        viewModelScope.launch {
-            val updatedSticker = sticker.copy(isFavorite = !sticker.isFavorite)
-            stickerRepository.update(updatedSticker)
         }
     }
 
