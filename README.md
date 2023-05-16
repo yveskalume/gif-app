@@ -1,7 +1,7 @@
 <h1 align="center">Gif App</h1><br>
 <p align="center">  
 Gif App is an Android application built using jetpack compose and other modern Android technology stacks and the MVVM architecture. 
-  The application just shows Gif images from <a href="https://developers.giphy.com">Giphy</a> API rest
+  The application just shows animated Stickers from <a href="https://developers.giphy.com">Giphy's</a> Rest API
 </p>
 <br>
 
@@ -13,12 +13,15 @@ Gif App is an Android application built using jetpack compose and other modern A
 
 ## Screenshots
 <p align="center">
-  <img src="/preview/preview1.gif" width="32%"/>
-  <img src="/preview/preview2.gif" width="32%"/>
+  <img src="/preview/preview1.png" width="32%"/>
+  <img src="/preview/preview2.png" width="32%"/>
+  <img src="/preview/preview2.png" width="32%"/>
 </p>
 
 ## Download
-Go to the [Releases](https://github.com/yveskalume/gif-app/releases) to download the latest APK.
+<a href="https://play.google.com/store/apps/details?id=com.yvkalume.gifapp">
+<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="70">
+</a>
 
 ## Tech stack & Open-source libraries
 - Minimum SDK level 24
@@ -31,7 +34,7 @@ Go to the [Releases](https://github.com/yveskalume/gif-app/releases) to download
     - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - UI related data holder, lifecycle aware.
     - [Room](https://developer.android.com/training/data-storage/room) - to construct database and persist data more easily.
     - [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview) - helps to load and display pages of data from a larger dataset in order to use both network bandwidth and system resources more efficiently
-- [Material Design](https://developer.android.com/jetpack/compose/designsystems) - Material Design comes with a rich set of Material components
+- [Material Design 3](https://developer.android.com/jetpack/compose/designsystems/material3) - Material 3 includes Material You personalization features like dynamic color, and is designed to be cohesive with the new visual style and system UI on Android 12 and above
 - [Mavericks](https://airbnb.io/mavericks) - Mavericks is the Android MVI framework from Airbnb.
 - [Lottie Android](https://github.com/airbnb/lottie-android) - Render After Effects animations natively on Android
 - [Ktor](https://github.com/square/retrofit) - consume the REST APIs.
