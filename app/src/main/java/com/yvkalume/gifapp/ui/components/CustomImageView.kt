@@ -1,6 +1,5 @@
 package com.yvkalume.gifapp.ui.components
 
-import android.graphics.Bitmap
 import android.os.Build
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.defaultMinSize
@@ -15,7 +14,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.drawable.toBitmap
 import coil.ImageLoader
 import coil.compose.SubcomposeAsyncImage
 import coil.decode.GifDecoder

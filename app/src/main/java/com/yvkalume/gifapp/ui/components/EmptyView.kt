@@ -14,30 +14,30 @@ import com.yvkalume.gifapp.ui.theme.GifAppTheme
 
 @Composable
 fun EmptyView(
-		modifier: Modifier = Modifier
+    modifier: Modifier = Modifier
 ) {
-		val composition by rememberLottieComposition(
-				LottieCompositionSpec.RawRes(R.raw.empty_icon)
-		)
+    val composition by rememberLottieComposition(
+        LottieCompositionSpec.RawRes(R.raw.empty_icon)
+    )
 
-		val progress by animateLottieCompositionAsState(
-				composition,
-				isPlaying = true,
-				iterations = LottieConstants.IterateForever,
-		)
+    val progress by animateLottieCompositionAsState(
+        composition,
+        isPlaying = true,
+        iterations = LottieConstants.IterateForever,
+    )
 
 
-		LottieAnimation(
-				composition = composition,
-				progress = { progress },
-				modifier = modifier
-		)
+    LottieAnimation(
+        composition = composition,
+        progress = { progress },
+        modifier = modifier
+    )
 }
 
 @Preview
 @Composable
 fun EmptyViewPreview() {
-		GifAppTheme {
-				EmptyView()
-		}
+    GifAppTheme {
+        EmptyView()
+    }
 }

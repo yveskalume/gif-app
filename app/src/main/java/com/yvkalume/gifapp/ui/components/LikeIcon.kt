@@ -13,25 +13,24 @@ import com.yvkalume.gifapp.R
 
 @Composable
 fun LikeIcon(
-		modifier: Modifier = Modifier,
-		isChecked: Boolean,
-		onClick: () -> Unit
+    modifier: Modifier = Modifier,
+    isChecked: Boolean,
+    onClick: () -> Unit
 ) {
-		val composition by rememberLottieComposition(
-				LottieCompositionSpec.RawRes(R.raw.favorite_icon)
-		)
-		val progress by animateFloatAsState(
-				targetValue = if (isChecked) 10f else 0f,
-				animationSpec = tween(3500)
-		)
+    val composition by rememberLottieComposition(
+        LottieCompositionSpec.RawRes(R.raw.favorite_icon)
+    )
+    val progress by animateFloatAsState(
+        targetValue = if (isChecked) 10f else 0f,
+        animationSpec = tween(3500),
+        label = "icon animation progress"
+    )
 
-		IconButton(onClick = onClick) {
-				LottieAnimation(
-						composition = composition,
-						progress = { if (isChecked) progress else 0f },
-						modifier = modifier
-				)
-		}
-
-
+    IconButton(onClick = onClick) {
+        LottieAnimation(
+            composition = composition,
+            progress = { if (isChecked) progress else 0f },
+            modifier = modifier
+        )
+    }
 }

@@ -67,6 +67,8 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.ktx)
     implementation(libs.bundles.compose)
+    implementation(libs.compose.material)
+    implementation(libs.compose.material3)
 
     implementation(libs.coil.compose)
     implementation(libs.coil.gif)

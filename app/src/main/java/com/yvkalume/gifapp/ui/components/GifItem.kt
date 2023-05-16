@@ -9,9 +9,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Download
 import androidx.compose.runtime.Composable
@@ -56,7 +56,7 @@ fun GifItem(gif: Gif, modifier: Modifier = Modifier, onFavoriteClick: (Gif) -> U
 
             IconButton(
                 onClick = {
-                    Toast.makeText(context,"Download started",Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Download started", Toast.LENGTH_LONG).show()
                     permissionState.launchPermissionRequest()
                     if (permissionState.status.isGranted) {
                         context.downloadFile(gif.imageUrl, "${gif.title}.gif")
