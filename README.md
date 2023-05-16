@@ -15,7 +15,7 @@ Gif App is an Android application built using jetpack compose and other modern A
 <p align="center">
   <img src="/preview/preview1.png" width="32%"/>
   <img src="/preview/preview2.png" width="32%"/>
-  <img src="/preview/preview2.png" width="32%"/>
+  <img src="/preview/preview3.png" width="32%"/>
 </p>
 
 ## Download
