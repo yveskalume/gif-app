@@ -95,10 +95,17 @@ dependencies {
 
     implementation(libs.mavericks)
     implementation(libs.mavericks.compose)
+    testImplementation(libs.mavericks.testing)
+
 
     implementation(libs.paging.compose)
 
     implementation(libs.accompanist.permision)
+
+    implementation(libs.modernStorage.permission)
+    implementation(libs.modernStorage.storage)
+
+    testImplementation(libs.turbine)
 }
 
 kapt {
