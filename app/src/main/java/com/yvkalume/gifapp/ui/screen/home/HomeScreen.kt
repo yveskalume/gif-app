@@ -30,7 +30,6 @@ fun HomeRoute(homeViewModel: HomeViewModel = mavericksViewModel()) {
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     gifsState: Async<List<Gif>>,
