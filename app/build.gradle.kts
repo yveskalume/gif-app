@@ -103,7 +103,6 @@ dependencies {
     implementation(libs.accompanist.permision)
 
     implementation(libs.modernStorage.permission)
-    implementation(libs.modernStorage.storage)
 
     testImplementation(libs.turbine)
 }

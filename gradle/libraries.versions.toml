@@ -100,7 +100,6 @@ timber = "com.jakewharton.timber:timber:5.0.1"
 
 accompanist-permision = "com.google.accompanist:accompanist-permissions:0.31.1-alpha"
 modernStorage-permission = { module = "com.google.modernstorage:modernstorage-permissions", version.ref = "modernStorage" }
-modernStorage-storage = { module = "com.google.modernstorage:modernstorage-storage", version.ref = "modernStorage" }
 turbine = "app.cash.turbine:turbine:0.13.0"
 
 [bundles]
