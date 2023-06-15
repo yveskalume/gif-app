@@ -22,7 +22,7 @@ android {
         applicationId = "com.yvkalume.gifapp"
         minSdk = 24
         targetSdk = 33
-        versionCode = 4
+        versionCode = 5
         versionName = "2.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
